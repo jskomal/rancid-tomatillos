@@ -3,17 +3,18 @@ import React, { Component } from 'react'
 export class Header extends Component {
   render() {
     return (
-      <div>
-        <h1>rancid tomatillos</h1>
-        <button>home</button>
+      <header>
+        <h1 className='logo-title'>rancid tomatillos</h1>
+        <button className='home-button'>home</button>
         <input
+          className='search'
           type='text'
           name='search'
           id='search'
           placeholder='search for a movie title'
         />
-        <button>log in</button>
-      </div>
+        <button className='log-button'>log in</button>
+      </header>
     )
   }
 }
