@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import movieData from '../movieData'
+import Header from '../Header/Header'
 
 export class App extends Component {
   constructor() {
