@@ -4,8 +4,10 @@ export class Header extends Component {
   render() {
     return (
       <header>
-        <h1 className='logo-title'>rancid tomatillos</h1>
-        <button className='home-button'>home</button>
+        <div className='logo-pair'>
+          <h1 className='logo-title pair-item'>rancid tomatillos</h1>
+          <button className='home-button pair-item'>home</button>
+        </div>
         <input
           className='search'
           type='text'
