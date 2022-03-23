@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import movieData from '../movieData'
 import Header from '../Header/Header'
+import Main from '../Main/Main'
 import './App.css'
 
 export class App extends Component {
@@ -15,6 +16,7 @@ export class App extends Component {
     return (
       <div>
         <Header movieData={movieData} />
+        <Main movieData={movieData} />
       </div>
     )
   }
