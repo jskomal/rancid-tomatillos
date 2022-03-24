@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {movieData, singleMovieData} from '../movieData'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
+import SingleView from '../SingleView/SingleView'
 import './App.css'
 
 export class App extends Component {
