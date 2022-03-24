@@ -8,15 +8,15 @@ export class App extends Component {
   constructor() {
     super()
     this.state = {
-      movieData: movieData
+      movies: movieData.movies
     }
   }
 
   render() {
     return (
       <div>
-        <Header movieData={movieData} />
-        <Main movieData={movieData} />
+        <Header movies={this.state.movies} />
+        <Main movies={this.state.movies} />
       </div>
     )
   }
