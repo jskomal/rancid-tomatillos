@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Card from '../Card/Card'
+import './SingleView.css'
 
 export class SingleView extends Component {
   constructor(props) {
@@ -21,12 +22,12 @@ export class SingleView extends Component {
         />
         <section className="single-movie-details">
           <img className="backdrop-img" src={backdrop_path} alt={`${title} backdrop`} />
-          <h3 className="movie-detail">{tagline}</h3>
-          <h3 className="movie-detail">{overview}</h3>
-          <h3 className="movie-detail">{genres}</h3>
-          <h3 className="movie-detail">{budget}</h3>
-          <h3 className="movie-detail">{revenue}</h3>
-          <h3 className="movie-detail">{runtime}</h3>
+          <h3 className="movie-detail">Tagline: {tagline}</h3>
+          <h3 className="movie-detail">Overview: {overview}</h3>
+          <h3 className="movie-detail">Genres: {genres}</h3>
+          <h3 className="movie-detail">Budget: {budget}</h3>
+          <h3 className="movie-detail">Revenue: {revenue}</h3>
+          <h3 className="movie-detail">Runtime: {runtime}</h3>
         </section>
       </section>
     )
