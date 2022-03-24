@@ -1,9 +1,9 @@
 import React from 'react'
 import './Card.css'
 
-const Card = ({ poster_path, title, average_rating, release_date }) => {
+const Card = ({ poster_path, title, average_rating, release_date, toggleView }) => {
   return (
-    <article className='poster-card'>
+    <article className='poster-card' onClick={toggleView}>
       <img className='poster-img' src={poster_path} alt={`${title} poster`} />
       <h2 className='poster-title'>{title}</h2>
       <section className='poster-footer'>
