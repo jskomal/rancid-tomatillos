@@ -10,6 +10,11 @@ export class SingleView extends Component {
 
   render() {
     const { id, title, poster_path, backdrop_path, release_date, overview, average_rating, genres, budget, revenue, runtime, tagline } = this.props.singleMovie
+    const formatter = new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    })
+
     return (
       <section className="single-view">
         <Card
@@ -24,9 +29,9 @@ export class SingleView extends Component {
           <h3 className="movie-detail">Tagline: {tagline}</h3>
           <h3 className="movie-detail">Overview: {overview}</h3>
           <h3 className="movie-detail">Genres: {genres}</h3>
-          <h3 className="movie-detail">Budget: {budget}</h3>
-          <h3 className="movie-detail">Revenue: {revenue}</h3>
-          <h3 className="movie-detail">Runtime: {runtime}</h3>
+          <h3 className="movie-detail">Budget: {formatter.format(budget)}</h3>
+          <h3 className="movie-detail">Revenue: {formatter.format(revenue)}</h3>
+          <h3 className="movie-detail">Runtime: {runtime} minutes</h3>
         </section>
       </section>
     )
