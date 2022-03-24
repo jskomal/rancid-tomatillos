@@ -37,6 +37,19 @@
   justify-content: space-around;
 }
 
+.footer-l {
+  text-align: left;
+}
+
 .footer-r {
   text-align: right;
+}
+
+.label {
+  font-size: 0.7rem;
+}
+
+.detail-pair {
+  display: flex;
+  flex-direction: column;
 }
