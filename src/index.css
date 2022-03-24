@@ -53,6 +53,6 @@ html {
   --accent-pink: #806074;
   --stack-dark-blue: #151f28;
   --stack-grey: #2e313f;
-  --accent-grey: #6a6b6c;
+  --accent-grey: rgba(51, 51, 51, 0.466);
   --stack-light-blue: #01cbc6;
 }
