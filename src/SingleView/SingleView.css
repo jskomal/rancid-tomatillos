@@ -7,14 +7,21 @@
 
 .backdrop-img {
   max-width: 45vw;
+  padding: 0.5rem;
 }
 
 .single-movie-details {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  background-color: var(--stack-dark-blue);
+  margin: 0.5rem 0;
+  height: 60vh;
+  border-radius: 0.3rem;
 }
 
 .movie-detail {
   width: 75ch;
+  border-bottom: 1px solid var(--stack-grey);
 }
