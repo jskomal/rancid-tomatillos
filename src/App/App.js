@@ -11,16 +11,16 @@ export class App extends Component {
     this.state = {
       movies: movieData.movies,
       singleMovie: singleMovieData.movie,
-      isSingleView: false
+      isSingleView: true
     }
   }
 
   render() {
     return (
       <div>
-        <Header movies={this.state.movies} />
-        <Main movies={this.state.movies} isSingleView={this.state.isSingleView} />
-        <SingleView singleMovie={this.state.singleMovie} />
+        <Header movies={this.state.movies} isSingleView={this.state.isSingleView} />
+        {!this.state.isSingleView && <Main movies={this.state.movies} isSingleView={this.state.isSingleView} />}
+        {this.state.isSingleView && <SingleView singleMovie={this.state.singleMovie} isSingleView={this.state.isSingleView} />}
       </div>
     )
   }
