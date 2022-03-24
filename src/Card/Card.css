@@ -1,0 +1,27 @@
+.poster-card {
+  width: 30vw;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  border: 1px solid var(--stack-dark-blue);
+  margin: 0.5rem 0;
+}
+
+.poster-img {
+  max-height: 55vh;
+}
+
+.poster-title {
+  border-bottom: 1px solid var(--stack-dark-blue);
+}
+
+.poster-footer {
+  width: 25vw;
+  font-size: 0.9rem;
+  display: flex;
+  justify-content: space-around;
+}
