@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './Header.css'
 
 export class Header extends Component {
   render() {
@@ -12,7 +13,6 @@ export class Header extends Component {
           className='search'
           type='text'
           name='search'
-          id='search'
           placeholder='search for a movie title'
         />
         <button className='log-button'>log in</button>
