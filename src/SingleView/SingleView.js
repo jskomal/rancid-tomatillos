@@ -9,7 +9,6 @@ export class SingleView extends Component {
   }
 
   render() {
-    console.log(this.props)
     const { id, title, poster_path, backdrop_path, release_date, overview, average_rating, genres, budget, revenue, runtime, tagline } = this.props.singleMovie
     return (
       <section className="single-view">
