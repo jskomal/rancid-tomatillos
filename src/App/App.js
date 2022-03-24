@@ -11,15 +11,28 @@ export class App extends Component {
     this.state = {
       movies: movieData.movies,
       singleMovie: singleMovieData.movie,
-      isSingleView: true
+      isSingleView: false
+    }
+  }
+
+  toggleView = (event) => {
+    event.preventDefault()
+    if (this.state.isSingleView) {
+      this.setState(prevState => {
+        return {isSingleView: !prevState.isSingleView}
+      })
+    } else if (!this.state.isSingleView && event.target.name !== 'home') {
+      this.setState(prevState => {
+        return {isSingleView: !prevState.isSingleView}
+      })
     }
   }
 
   render() {
     return (
       <div>
-        <Header movies={this.state.movies} isSingleView={this.state.isSingleView} />
-        {!this.state.isSingleView && <Main movies={this.state.movies} isSingleView={this.state.isSingleView} />}
+        <Header movies={this.state.movies} isSingleView={this.state.isSingleView} toggleView={this.toggleView}/>
+        {!this.state.isSingleView && <Main movies={this.state.movies} isSingleView={this.state.isSingleView} toggleView={this.toggleView}/>}
         {this.state.isSingleView && <SingleView singleMovie={this.state.singleMovie} isSingleView={this.state.isSingleView} />}
       </div>
     )
