@@ -28,6 +28,7 @@ button {
   border: none;
   border-radius: 0.3rem;
   border: 1px solid var(--stack-grey);
+  cursor: pointer;
 }
 
 button:hover,
