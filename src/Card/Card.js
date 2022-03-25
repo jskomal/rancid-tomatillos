@@ -1,4 +1,5 @@
 import React from 'react'
+import StarRatings from 'react-star-ratings/build/star-ratings'
 import './Card.css'
 
 const Card = ({ poster_path, title, average_rating, release_date, toggleView }) => {
@@ -9,7 +10,12 @@ const Card = ({ poster_path, title, average_rating, release_date, toggleView }) 
       <section className='poster-footer'>
         <div className='detail-pair'>
           <h3 className='footer-item-l label'>rating:</h3>
-          <h3 className='footer-item-l'>{average_rating.toFixed(2)}</h3>
+          <StarRatings
+            rating={parseFloat((average_rating / 2).toFixed(2))}
+            starDimension='1vw'
+            starSpacing='0'
+            starRatedColor='goldenrod'
+          />
         </div>
         <div className='detail-pair'>
           <h3 className='footer-r label'>released in:</h3>
