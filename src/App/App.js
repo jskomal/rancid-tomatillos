@@ -12,7 +12,8 @@ export class App extends Component {
       movies: null,
       singleMovie: null,
       isSingleView: false,
-      isLoading: true
+      isLoading: true,
+      isError: false
     }
   }
 
@@ -22,6 +23,7 @@ export class App extends Component {
       .then((data) => {
         this.setState({ movies: data.movies, isLoading: false })
       })
+      .catch((error) => this.setState({ isError: true }))
   }
 
   toggleView = (event) => {
@@ -46,6 +48,7 @@ export class App extends Component {
               isSingleView: !prevState.isSingleView
             })
           })
+          .catch((error) => this.setState({ isError: true }))
       })
     }
   }
@@ -58,12 +61,17 @@ export class App extends Component {
           isSingleView={this.state.isSingleView}
           toggleView={this.toggleView}
         />
-        {this.state.isLoading && (
+        {this.state.isError && (
+          <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+            Server Error, try Rotten Tomatoes instead
+          </h1>
+        )}
+        {this.state.isLoading && !this.state.isError && (
           <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
             Loading... Grab some popcorn!
           </h1>
         )}
-        {!this.state.isSingleView && !this.state.isLoading && (
+        {!this.state.isSingleView && !this.state.isLoading && !this.state.isError && (
           <Main
             movies={this.state.movies}
             isSingleView={this.state.isSingleView}
