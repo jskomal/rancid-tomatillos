@@ -7,6 +7,7 @@
 
 .backdrop-img {
   max-width: 45vw;
+  max-height: 50vh;
   padding: 0.5rem;
 }
 
@@ -17,11 +18,11 @@
   justify-content: space-between;
   background-color: var(--stack-dark-blue);
   margin: 0.5rem 0;
-  height: 60vh;
   border-radius: 0.3rem;
 }
 
 .movie-detail {
-  width: 75ch;
+  width: 50ch;
   border-bottom: 1px solid var(--stack-grey);
+  margin: 0 0.5rem;
 }
