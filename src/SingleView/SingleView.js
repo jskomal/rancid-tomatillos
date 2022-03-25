@@ -44,7 +44,11 @@ export class SingleView extends Component {
           )}
           {tagline && <h3 className='movie-detail'>Tagline: {tagline}</h3>}
           {overview && <h3 className='movie-detail'>Overview: {overview}</h3>}
-          {genres[0] && <h3 className='movie-detail'>Genres: {genres}</h3>}
+          {genres[0] && (
+            <h3 className='movie-detail'>
+              Genres: {genres.map((genre) => ` ${genre}`).toString()}
+            </h3>
+          )}
           {budget !== 0 && (
             <h3 className='movie-detail'>Budget: {formatter.format(budget)}</h3>
           )}
