@@ -5,6 +5,7 @@ import Card from '../Card/Card'
 const Main = ({ movies, toggleView }) => {
   const cards = movies.map((movie) => (
     <Card
+      id={movie.id}
       poster_path={movie.poster_path}
       title={movie.title}
       average_rating={movie.average_rating}
