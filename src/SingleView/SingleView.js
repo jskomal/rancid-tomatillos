@@ -9,14 +9,27 @@ export class SingleView extends Component {
   }
 
   render() {
-    const { id, title, poster_path, backdrop_path, release_date, overview, average_rating, genres, budget, revenue, runtime, tagline } = this.props.singleMovie
+    const {
+      id,
+      title,
+      poster_path,
+      backdrop_path,
+      release_date,
+      overview,
+      average_rating,
+      genres,
+      budget,
+      revenue,
+      runtime,
+      tagline
+    } = this.props.singleMovie
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
-      currency: 'USD',
+      currency: 'USD'
     })
 
     return (
-      <section className="single-view">
+      <section className='single-view'>
         <Card
           poster_path={poster_path}
           title={title}
@@ -24,14 +37,29 @@ export class SingleView extends Component {
           release_date={release_date}
           key={id}
         />
-        <section className="single-movie-details">
-          <img className="backdrop-img" src={backdrop_path} alt={`${title} backdrop`} />
-          <h3 className="movie-detail">Tagline: {tagline}</h3>
-          <h3 className="movie-detail">Overview: {overview}</h3>
-          <h3 className="movie-detail">Genres: {genres}</h3>
-          <h3 className="movie-detail">Budget: {formatter.format(budget)}</h3>
-          <h3 className="movie-detail">Revenue: {formatter.format(revenue)}</h3>
-          <h3 className="movie-detail">Runtime: {runtime} minutes</h3>
+
+        <section className='single-movie-details'>
+          {backdrop_path && (
+            <img className='backdrop-img' src={backdrop_path} alt={`${title} backdrop`} />
+          )}
+          {tagline && <h3 className='movie-detail'>Tagline: {tagline}</h3>}
+          {overview && <h3 className='movie-detail'>Overview: {overview}</h3>}
+          {genres[0] && <h3 className='movie-detail'>Genres: {genres}</h3>}
+          {budget !== 0 && (
+            <h3 className='movie-detail'>Budget: {formatter.format(budget)}</h3>
+          )}
+          {revenue !== 0 && (
+            <h3 className='movie-detail'>Revenue: {formatter.format(revenue)}</h3>
+          )}
+          {runtime !== 0 && <h3 className='movie-detail'>Runtime: {runtime} minutes</h3>}
+          {!tagline &&
+          !overview &&
+          !genres[0] &&
+          !budget !== 0 &&
+          !revenue !== 0 &&
+          !runtime !== 0 ? (
+            <h3 style={{ marginBottom: '20vh' }}>No information for this movie</h3>
+          ) : null}
         </section>
       </section>
     )
