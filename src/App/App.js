@@ -18,8 +18,7 @@ export class App extends Component {
   }
 
   componentDidMount() {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies`)
-      .then((res) => res.json())
+    fetchData('movies')
       .then((data) => {
         this.setState({ movies: data.movies, isLoading: false })
       })
