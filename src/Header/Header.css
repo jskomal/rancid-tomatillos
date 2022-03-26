@@ -37,6 +37,7 @@ button:hover,
 }
 
 .search {
+  color: #fff;
   transform: translate(-20%, 0);
   width: 30vw;
   border: none;
