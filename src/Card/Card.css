@@ -12,6 +12,7 @@
   margin: 0.5rem 0;
   transition: all 200ms ease-in-out;
   cursor: pointer;
+  box-shadow: 0 0 3px var(--accent-pink);
 }
 
 .poster-card:hover {
@@ -27,7 +28,7 @@
 
 .poster-title {
   border-bottom: 1px solid var(--stack-grey);
-  overflow: hidden;
+  font-size: 1.4rem;
 }
 
 .poster-footer {
@@ -52,4 +53,8 @@
 .detail-pair {
   display: flex;
   flex-direction: column;
+}
+
+.stars {
+  transform: translate(-0.3vw, 0);
 }

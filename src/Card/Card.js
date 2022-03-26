@@ -14,12 +14,14 @@ const Card = ({ poster_path, title, average_rating, release_date, toggleView, id
           <h3 id={id} className='footer-item-l label'>
             rating:
           </h3>
-          <StarRatings
-            rating={parseFloat((average_rating / 2).toFixed(2))}
-            starDimension='1vw'
-            starSpacing='0'
-            starRatedColor='goldenrod'
-          />
+          <div className='stars'>
+            <StarRatings
+              rating={parseFloat((average_rating / 2).toFixed(2))}
+              starDimension='1vw'
+              starSpacing='0'
+              starRatedColor='goldenrod'
+            />
+          </div>
         </div>
         <div id={id} className='detail-pair'>
           <h3 id={id} className='footer-r label'>
