@@ -28,7 +28,7 @@ button {
 
 button:hover,
 .search:hover {
-  border: 1px solid var(--accent-grey);
+  border: 1px solid var(--accent-pink);
 }
 
 ::placeholder {
