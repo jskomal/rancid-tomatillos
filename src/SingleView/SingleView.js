@@ -86,7 +86,11 @@ export class SingleView extends Component {
           ) : null}
         </section>
       </section>
-    ) : null
+    ) : (
+      <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+        Loading... Grab some popcorn!
+      </h1>
+    )
   }
 }
 
