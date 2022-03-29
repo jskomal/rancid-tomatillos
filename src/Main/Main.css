@@ -3,3 +3,8 @@
   flex-wrap: wrap;
   justify-content: space-around;
 }
+
+.card-link {
+  text-decoration: none;
+  color: #fff;
+}
