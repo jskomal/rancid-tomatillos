@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { fetchData } from '../APICalls'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import SingleView from '../SingleView/SingleView'
@@ -10,6 +9,7 @@ export class App extends Component {
     super()
     this.state = {
       movies: null,
+      filteredMovies: null,
       singleMovie: null,
       isSingleView: false,
       isLoading: true,
@@ -17,13 +17,31 @@ export class App extends Component {
     }
   }
 
+  fetchData = (path) => {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`).then((res) => {
+      this.setState({ isLoading: true })
+      return res.json()
+    })
+  }
+
   componentDidMount() {
-    fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies`)
-      .then((res) => res.json())
+    this.fetchData('movies')
       .then((data) => {
-        this.setState({ movies: data.movies, isLoading: false })
+        this.setState({
+          movies: data.movies,
+          filteredMovies: data.movies,
+          isLoading: false
+        })
       })
       .catch((error) => this.setState({ isError: true }))
+  }
+
+  filterMovies = (searchTerm) => {
+    this.setState({
+      filteredMovies: this.state.movies.filter((movie) =>
+        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    })
   }
 
   toggleView = (event) => {
@@ -34,14 +52,8 @@ export class App extends Component {
       })
     } else if (!this.state.isSingleView && event.target.name !== 'home') {
       this.setState((prevState) => {
-        fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${event.target.id}`)
-          .then((res) => {
-            this.setState({ isLoading: true })
-            return res.json()
-          })
+        this.fetchData(`movies/${event.target.id}`)
           .then((data) => {
-            console.log(event.target)
-            console.log(data)
             this.setState({
               singleMovie: data.movie,
               isLoading: false,
@@ -60,6 +72,7 @@ export class App extends Component {
           movies={this.state.movies}
           isSingleView={this.state.isSingleView}
           toggleView={this.toggleView}
+          filterMovies={this.filterMovies}
         />
         {this.state.isError && (
           <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
@@ -73,7 +86,7 @@ export class App extends Component {
         )}
         {!this.state.isSingleView && !this.state.isLoading && !this.state.isError && (
           <Main
-            movies={this.state.movies}
+            movies={this.state.filteredMovies}
             isSingleView={this.state.isSingleView}
             toggleView={this.toggleView}
           />
