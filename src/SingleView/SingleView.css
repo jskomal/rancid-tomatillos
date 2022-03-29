@@ -19,6 +19,7 @@
   background-color: var(--stack-dark-blue);
   margin: 0.5rem 0;
   border-radius: 0.3rem;
+  box-shadow: 0 0 3px var(--accent-pink);
 }
 
 .movie-detail {
