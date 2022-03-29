@@ -5,7 +5,21 @@ import './SingleView.css'
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { currentMovie: { id: props.currentMovieID.id } }
+  }
+
+  fetchData = (path) => {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`).then((res) => {
+      return res.json()
+    })
+  }
+
+  componentDidMount() {
+    this.fetchData(`movies/${this.state.currentMovie.id}`).then((data) => {
+      this.setState({
+        currentMovie: { ...data.movie }
+      })
+    })
   }
 
   render() {
@@ -22,13 +36,13 @@ export class SingleView extends Component {
       revenue,
       runtime,
       tagline
-    } = this.props.singleMovie
+    } = this.state.currentMovie
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
     })
 
-    return (
+    return this.state.currentMovie.title ? (
       <section className='single-view'>
         <Card
           poster_path={poster_path}
@@ -71,7 +85,7 @@ export class SingleView extends Component {
           ) : null}
         </section>
       </section>
-    )
+    ) : null
   }
 }
 
