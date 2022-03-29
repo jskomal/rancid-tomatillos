@@ -3,7 +3,7 @@ import Header from '../Header/Header'
 import Main from '../Main/Main'
 import SingleView from '../SingleView/SingleView'
 import './App.css'
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 export class App extends Component {
   constructor() {
@@ -68,40 +68,62 @@ export class App extends Component {
 
   render() {
     return (
-      <Route path='/' render={() => {
-        return <div>
-          <Header
-          movies={this.state.movies}
-          isSingleView={this.state.isSingleView}
-          toggleView={this.toggleView}
-          filterMovies={this.filterMovies}
-          />
-          {this.state.isError && (
-            <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
-            Server Error, try Rotten Tomatoes instead
-            </h1>
-          )}
-          {this.state.isLoading && !this.state.isError && (
-            <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
-            Loading... Grab some popcorn!
-            </h1>
-          )}
-          {!this.state.isSingleView && !this.state.isLoading && !this.state.isError && (
-            <Main
-            movies={this.state.filteredMovies}
+      <Switch>
+        <Route exact path='/' render={() => {
+          return <div>
+            <Header
+            movies={this.state.movies}
             isSingleView={this.state.isSingleView}
             toggleView={this.toggleView}
-          />
-        )}
-        </div>
-      }} />)
-        // {this.state.isSingleView && (
-        //   <SingleView
-        //     singleMovie={this.state.singleMovie}
-        //     isSingleView={this.state.isSingleView}
-        //   />
-        // )}
-    // )
+            filterMovies={this.filterMovies}
+            />
+            {this.state.isError && (
+              <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+              Server Error, try Rotten Tomatoes instead
+              </h1>
+            )}
+            {this.state.isLoading && !this.state.isError && (
+              <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+              Loading... Grab some popcorn!
+              </h1>
+            )}
+            {!this.state.isSingleView && !this.state.isLoading && !this.state.isError && (
+              <Main
+              movies={this.state.filteredMovies}
+              isSingleView={this.state.isSingleView}
+              toggleView={this.toggleView}
+            />
+          )}
+          </div>
+        }} />
+        <Route exact path='/:id' render={() => { (
+          <div>
+            <Header
+            movies={this.state.movies}
+            isSingleView={this.state.isSingleView}
+            toggleView={this.toggleView}
+            filterMovies={this.filterMovies}
+            />
+            {this.state.isError && (
+              <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+              Server Error, try Rotten Tomatoes instead
+              </h1>
+            )}
+            {this.state.isLoading && !this.state.isError && (
+              <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+              Loading... Grab some popcorn!
+              </h1>
+            )}
+            {this.state.isSingleView && (
+              <SingleView
+                singleMovie={this.state.singleMovie}
+                isSingleView={this.state.isSingleView}
+              />
+            )}
+          </div>)
+        }} />)
+      </Switch>
+    )
   }
 }
 
