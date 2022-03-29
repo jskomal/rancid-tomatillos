@@ -27,14 +27,16 @@ export class Header extends Component {
             home
           </button>
         </div>
-        <input
-          className='search'
-          type='text'
-          name='search'
-          value={this.state.searchValue}
-          placeholder='search for a movie title'
-          onChange={this.handleTextInput}
-        />
+        {!this.props.isSingleView && (
+          <input
+            className='search'
+            type='text'
+            name='search'
+            value={this.state.searchValue}
+            placeholder='search for a movie title'
+            onChange={this.handleTextInput}
+          />
+        )}
         <button className='log-button'>log in</button>
       </header>
     )

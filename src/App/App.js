@@ -27,6 +27,9 @@ export class App extends Component {
   componentDidMount() {
     this.fetchData('movies')
       .then((data) => {
+        if (this.state.isSingleView) {
+          this.setState({ isSingleView: false })
+        }
         this.setState({
           movies: data.movies,
           filteredMovies: data.movies,
@@ -41,6 +44,12 @@ export class App extends Component {
       filteredMovies: this.state.movies.filter((movie) =>
         movie.title.toLowerCase().includes(searchTerm.toLowerCase())
       )
+    })
+  }
+
+  toggleSingleView = () => {
+    this.setState((prevState) => {
+      return { isSingleView: !prevState.isSingleView }
     })
   }
 
@@ -68,15 +77,13 @@ export class App extends Component {
                     Loading... Grab some popcorn!
                   </h1>
                 )}
-                {!this.state.isSingleView &&
-                  !this.state.isLoading &&
-                  !this.state.isError && (
-                    <Main
-                      movies={this.state.filteredMovies}
-                      isSingleView={this.state.isSingleView}
-                      toggleView={this.toggleView}
-                    />
-                  )}
+                {!this.state.isLoading && !this.state.isError && (
+                  <Main
+                    movies={this.state.filteredMovies}
+                    isSingleView={this.state.isSingleView}
+                    toggleView={this.toggleView}
+                  />
+                )}
               </div>
             )
           }}
@@ -97,14 +104,9 @@ export class App extends Component {
                     Server Error, try Rotten Tomatoes instead
                   </h1>
                 )}
-                {/* {this.state.isLoading && !this.state.isError && (
-                  <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
-                    Loading... Grab some popcorn!
-                  </h1>
-                )} */}
                 <SingleView
-                  isSingleView={this.state.isSingleView}
                   currentMovieID={match.params}
+                  toggleSingleView={this.toggleSingleView}
                 />
               </div>
             )
