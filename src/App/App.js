@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { fetchData } from '../APICalls'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import SingleView from '../SingleView/SingleView'
@@ -18,8 +17,15 @@ export class App extends Component {
     }
   }
 
+  fetchData = (path) => {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`).then((res) => {
+      this.setState({ isLoading: true })
+      return res.json()
+    })
+  }
+
   componentDidMount() {
-    fetchData('movies')
+    this.fetchData('movies')
       .then((data) => {
         this.setState({
           movies: data.movies,
@@ -46,11 +52,7 @@ export class App extends Component {
       })
     } else if (!this.state.isSingleView && event.target.name !== 'home') {
       this.setState((prevState) => {
-        fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/movies/${event.target.id}`)
-          .then((res) => {
-            this.setState({ isLoading: true })
-            return res.json()
-          })
+        this.fetchData(`movies/${event.target.id}`)
           .then((data) => {
             this.setState({
               singleMovie: data.movie,
