@@ -49,12 +49,13 @@ export class App extends Component {
         <Route
           exact
           path='/'
-          render={() => {
+          render={({ location }) => {
             return (
               <div>
                 <Header
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
+                  location={location.pathname}
                 />
                 {this.state.isError && (
                   <h1 className='status-msg'>
@@ -79,12 +80,13 @@ export class App extends Component {
         <Route
           exact
           path='/:id'
-          render={({ match }) => {
+          render={({ match, location }) => {
             return (
               <div>
                 <Header
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
+                  location={location.pathname}
                 />
                 {this.state.isError && (
                   <h1 className='status-msg'>
