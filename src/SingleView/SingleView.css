@@ -2,7 +2,6 @@
   display: flex;
   justify-content: space-around;
   width: 100%;
-  height: 90vh;
 }
 
 .backdrop-img {
@@ -19,10 +18,16 @@
   background-color: var(--stack-dark-blue);
   margin: 0.5rem 0;
   border-radius: 0.3rem;
+  box-shadow: 0 0 3px var(--accent-pink);
 }
 
 .movie-detail {
   width: 50ch;
   border-bottom: 1px solid var(--stack-grey);
   margin: 0 0.5rem;
+}
+
+.movie-detail-error {
+  margin-bottom: 20vh;
+  padding: 0 1rem;
 }

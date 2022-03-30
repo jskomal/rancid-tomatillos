@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import './Header.css'
 
 export class Header extends Component {
@@ -19,22 +20,22 @@ export class Header extends Component {
       <header>
         <div className='logo-pair'>
           <h1 className='logo-title pair-item'>rancid tomatillos</h1>
-          <button
-            className='home-button pair-item'
-            name='home'
-            onClick={this.props.toggleView}
-          >
-            home
-          </button>
+          <Link to='/'>
+            <button className='home-button pair-item' name='home'>
+              home
+            </button>
+          </Link>
         </div>
-        <input
-          className='search'
-          type='text'
-          name='search'
-          value={this.state.searchValue}
-          placeholder='search for a movie title'
-          onChange={this.handleTextInput}
-        />
+        {this.props.location === '/' && (
+          <input
+            className='search'
+            type='text'
+            name='search'
+            value={this.state.searchValue}
+            placeholder='search for a movie title'
+            onChange={this.handleTextInput}
+          />
+        )}
         <button className='log-button'>log in</button>
       </header>
     )

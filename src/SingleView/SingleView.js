@@ -5,7 +5,26 @@ import './SingleView.css'
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '' }
+  }
+
+  fetchData = (path) => {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`)
+      .then((res) => {
+        if (!res.ok) {
+          this.setState({ errorMsg: 'Something went wrong, try again later' })
+        }
+      return res.json()
+    })
+    .catch(error => { throw new Error(error) })
+  }
+
+  componentDidMount() {
+    this.fetchData(`movies/${this.state.currentMovie.id}`).then((data) => {
+      this.setState({
+        currentMovie: { ...data.movie }
+      })
+    })
   }
 
   render() {
@@ -22,14 +41,15 @@ export class SingleView extends Component {
       revenue,
       runtime,
       tagline
-    } = this.props.singleMovie
+    } = this.state.currentMovie
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
     })
 
-    return (
+    return this.state.currentMovie.title ? (
       <section className='single-view'>
+      <h1 className='status-msg'>{ this.state.errorMsg }</h1>
         <Card
           poster_path={poster_path}
           title={title}
@@ -62,15 +82,16 @@ export class SingleView extends Component {
           !budget !== 0 &&
           !revenue !== 0 &&
           !runtime !== 0 ? (
-            <h3
-              className='movie-detail-error'
-              style={{ marginBottom: '20vh', padding: '0 1rem' }}
-            >
+            <h3 className='movie-detail-error'>
               No information is available for this movie
             </h3>
           ) : null}
         </section>
       </section>
+    ) : (
+      <h1 className='status-msg'>
+        Loading... Grab some popcorn!
+      </h1>
     )
   }
 }
