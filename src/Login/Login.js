@@ -2,6 +2,13 @@ import React, { Component } from 'react'
 import './Login.css'
 
 export class Login extends Component {
+  constructor() {
+    super()
+    this.state = { email:'', password:'', statusMsg:'', hasError: false }
+  }
+  handleTextInput = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
   render() {
     return (
       <div className='login-view'>
@@ -12,7 +19,7 @@ export class Login extends Component {
           name='email'
           placeholder='email address'
           value={ this.state.email }
-          // add on change
+          onChange={ this.handleTextInput }
         />
         <input
           className='login-input'
@@ -20,10 +27,10 @@ export class Login extends Component {
           name='password'
           placeholder='password'
           value={ this.state.password }
-          // add on change
+          onChange={ this.handleTextInput }
         />
         <button className='login-button'>log in</button>
-        <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff'}}
+        <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff'}}>{ this.state.statusMsg }</p>
       </div>
     )
   }
