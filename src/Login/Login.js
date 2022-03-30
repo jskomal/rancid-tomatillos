@@ -19,6 +19,39 @@ export class Login extends Component {
     this.setState({ email : '', password: ''})
   }
 
+  submitLogin = (e) => {
+    e.preventDefault()
+    if (this.validateInputs()) {
+      fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email: this.state.email, password: this.state.password })
+      })
+      .then(res => {
+        if (res.status === 403) {
+          this.clearInputs()
+          this.setState({ statusMsg: 'Incorrect email and password combination', hasError: true })
+          throw new Error(res.status)
+        } else if (!res.ok) {
+          this.clearInputs()
+          this.setState({ statusMsg: 'Something went wrong, please try again later', hasError: true })
+          throw new Error(res.status)
+        } else {
+          return res.json()
+        }
+      })
+      .then(data => {
+        this.props.toggleLogInStatus(data.user)
+        this.clearInputs()
+        this.setState({ hasError: false, statusMsg: 'SUCCESS!' })
+      })
+    } else {
+      this.setState({ statusMsg: 'You must provide an email and password to submit'})
+    }
+  }
+
   render() {
     return (
       <div className='login-view'>
