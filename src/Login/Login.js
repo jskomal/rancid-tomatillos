@@ -22,6 +22,8 @@ export class Login extends Component {
           value={ this.state.password }
           // add on change
         />
+        <button className='login-button'>log in</button>
+        <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff'}}
       </div>
     )
   }
