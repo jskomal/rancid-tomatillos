@@ -5,13 +5,18 @@ import './SingleView.css'
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '', hasError: false }
+    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '' }
   }
 
   fetchData = (path) => {
-    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`).then((res) => {
+    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`)
+      .then((res) => {
+        if (!res.ok) {
+          this.setState({ errorMsg: 'Something went wrong, try again later' })
+        }
       return res.json()
     })
+    .catch(error => throw new Error(error))
   }
 
   componentDidMount() {
