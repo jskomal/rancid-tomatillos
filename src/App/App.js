@@ -100,6 +100,7 @@ export class App extends Component {
               </div>
             )
           }}
+        />
         <Route
           exact
           path='/:id'
