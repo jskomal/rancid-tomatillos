@@ -15,6 +15,10 @@ export class Login extends Component {
     return this.state.email && this.state.password ? true : false
   }
 
+  clearInputs = () => {
+    this.setState({ email : '', password: ''})
+  }
+
   render() {
     return (
       <div className='login-view'>
