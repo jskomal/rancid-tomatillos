@@ -6,9 +6,15 @@ export class Login extends Component {
     super()
     this.state = { email:'', password:'', statusMsg:'', hasError: false }
   }
+
   handleTextInput = (e) => {
     this.setState({ [e.target.name]: e.target.value })
   }
+
+  validateInputs = () => {
+    return this.state.email && this.state.password ? true : false
+  }
+
   render() {
     return (
       <div className='login-view'>
