@@ -96,7 +96,7 @@ export class App extends Component {
                   filterMovies={this.filterMovies}
                   location={location.pathname}
                 />
-                <Login />
+                <Login toggleLogInStatus={ this.toggleLogInStatus }/>
               </div>
             )
           }}
