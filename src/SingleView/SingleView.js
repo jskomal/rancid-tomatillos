@@ -15,7 +15,6 @@ export class SingleView extends Component {
   }
 
   componentDidMount() {
-    this.props.toggleSingleView()
     this.fetchData(`movies/${this.state.currentMovie.id}`).then((data) => {
       this.setState({
         currentMovie: { ...data.movie }
