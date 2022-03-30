@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import SingleView from '../SingleView/SingleView'
+import Login from '../Login/Login'
 import './App.css'
 import { Route, Switch } from 'react-router-dom'
 
