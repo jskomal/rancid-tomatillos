@@ -38,7 +38,7 @@ button:hover,
 
 .search {
   color: #fff;
-  transform: translate(-20%, 0);
+  transform: translate(-30%, 0);
   width: 30vw;
   border: none;
   background-color: var(--stack-grey);
