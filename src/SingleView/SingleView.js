@@ -77,10 +77,7 @@ export class SingleView extends Component {
           !budget !== 0 &&
           !revenue !== 0 &&
           !runtime !== 0 ? (
-            <h3
-              className='movie-detail-error'
-              style={{ marginBottom: '20vh', padding: '0 1rem' }}
-            >
+            <h3 className='movie-detail-error'>
               No information is available for this movie
             </h3>
           ) : null}
