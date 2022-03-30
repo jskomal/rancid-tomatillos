@@ -39,7 +39,7 @@ export class Login extends Component {
           value={ this.state.password }
           onChange={ this.handleTextInput }
         />
-        <button className='login-button'>log in</button>
+        <button className='login-button' onClick={ this.submitLogIn }>log in</button>
         <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff'}}>{ this.state.statusMsg }</p>
       </div>
     )
