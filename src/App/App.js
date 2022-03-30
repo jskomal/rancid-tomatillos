@@ -11,7 +11,6 @@ export class App extends Component {
     this.state = {
       movies: null,
       filteredMovies: null,
-      isSingleView: false,
       isLoading: true,
       isError: false
     }
@@ -27,9 +26,6 @@ export class App extends Component {
   componentDidMount() {
     this.fetchData('movies')
       .then((data) => {
-        if (this.state.isSingleView) {
-          this.setState({ isSingleView: false })
-        }
         this.setState({
           movies: data.movies,
           filteredMovies: data.movies,
@@ -47,12 +43,6 @@ export class App extends Component {
     })
   }
 
-  toggleSingleView = () => {
-    this.setState((prevState) => {
-      return { isSingleView: !prevState.isSingleView }
-    })
-  }
-
   render() {
     return (
       <Switch>
@@ -64,7 +54,6 @@ export class App extends Component {
               <div>
                 <Header
                   movies={this.state.movies}
-                  isSingleView={this.state.isSingleView}
                   filterMovies={this.filterMovies}
                 />
                 {this.state.isError && (
@@ -80,7 +69,6 @@ export class App extends Component {
                 {!this.state.isLoading && !this.state.isError && (
                   <Main
                     movies={this.state.filteredMovies}
-                    isSingleView={this.state.isSingleView}
                     toggleView={this.toggleView}
                   />
                 )}
@@ -96,7 +84,6 @@ export class App extends Component {
               <div>
                 <Header
                   movies={this.state.movies}
-                  isSingleView={this.state.isSingleView}
                   filterMovies={this.filterMovies}
                 />
                 {this.state.isError && (
@@ -106,7 +93,6 @@ export class App extends Component {
                 )}
                 <SingleView
                   currentMovieID={match.params}
-                  toggleSingleView={this.toggleSingleView}
                 />
               </div>
             )
