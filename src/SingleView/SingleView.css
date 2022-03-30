@@ -27,3 +27,8 @@
   border-bottom: 1px solid var(--stack-grey);
   margin: 0 0.5rem;
 }
+
+.movie-detail-error {
+  margin-bottom: 20vh;
+  padding: 0 1rem;
+}
