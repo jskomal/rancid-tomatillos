@@ -16,7 +16,7 @@ export class SingleView extends Component {
         }
       return res.json()
     })
-    .catch(error => throw new Error(error))
+    .catch(error => { throw new Error(error) })
   }
 
   componentDidMount() {
