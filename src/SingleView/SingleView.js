@@ -5,7 +5,7 @@ import './SingleView.css'
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = { currentMovie: { id: props.currentMovieID.id } }
+    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '', hasError: false }
   }
 
   fetchData = (path) => {
@@ -44,6 +44,7 @@ export class SingleView extends Component {
 
     return this.state.currentMovie.title ? (
       <section className='single-view'>
+      <h1 className='status-msg'>{ this.state.errorMsg }</h1>
         <Card
           poster_path={poster_path}
           title={title}
