@@ -81,6 +81,21 @@ export class App extends Component {
         />
         <Route
           exact
+          path='/login'
+          render={( { location }) => {
+            return (
+              <div>
+                <Header
+                  movies={this.state.movies}
+                  filterMovies={this.filterMovies}
+                  location={location.pathname}
+                />
+                <Login />
+              </div>
+            )
+          }}
+        <Route
+          exact
           path='/:id'
           render={({ match, location }) => {
             return (
