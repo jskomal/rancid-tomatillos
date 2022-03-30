@@ -13,7 +13,9 @@ export class App extends Component {
       movies: null,
       filteredMovies: null,
       isLoading: true,
-      isError: false
+      isError: false,
+      isLoggedIn: false,
+      userData: null
     }
   }
 
@@ -43,6 +45,10 @@ export class App extends Component {
         movie.title.toLowerCase().includes(searchTerm.toLowerCase())
       )
     })
+  }
+
+  toggleLogInStatus = (userData) => {
+    this.setState({ isLoggedIn: !this.state.isLoggedIn, userData: userData})
   }
 
   render() {
