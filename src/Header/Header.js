@@ -26,7 +26,7 @@ export class Header extends Component {
             </button>
           </Link>
         </div>
-        {!this.props.isSingleView && (
+        {this.props.location === '/' && (
           <input
             className='search'
             type='text'
