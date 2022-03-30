@@ -32,7 +32,8 @@ export class App extends Component {
           isLoading: false
         })
       })
-      .catch((error) => this.setState({ isError: true }))
+      .catch((error) => { this.setState({ isError: true })
+        throw new Error(error) })
   }
 
   filterMovies = (searchTerm) => {
