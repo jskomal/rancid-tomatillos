@@ -68,12 +68,12 @@ export class App extends Component {
                   filterMovies={this.filterMovies}
                 />
                 {this.state.isError && (
-                  <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+                  <h1 className='status-msg'>
                     Server Error, try Rotten Tomatoes instead
                   </h1>
                 )}
                 {this.state.isLoading && !this.state.isError && (
-                  <h1 style={{ textAlign: 'center', marginTop: '5vh' }}>
+                  <h1 className='status-msg'>
                     Loading... Grab some popcorn!
                   </h1>
                 )}
