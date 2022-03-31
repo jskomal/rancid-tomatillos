@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import './Login.css'
 
 export class Login extends Component {
   constructor() {
     super()
-    this.state = { email: '', password: '', statusMsg: '', hasError: false }
+    this.state = {
+      email: '',
+      password: '',
+      statusMsg: '',
+      hasError: false,
+      isLoggedIn: false
+    }
   }
 
   handleTextInput = (e) => {
@@ -51,8 +58,16 @@ export class Login extends Component {
         .then((data) => {
           this.props.toggleLogInStatus(data.user)
           this.clearInputs()
-          this.setState({ hasError: false, statusMsg: 'SUCCESS!' })
+          this.setState({
+            hasError: false,
+            statusMsg: 'Success, Routing you to the home page!'
+          })
         })
+        .then(() =>
+          setTimeout(() => {
+            this.setState({ isLoggedIn: true })
+          }, 2000)
+        )
     } else {
       this.setState({ statusMsg: 'You must provide an email and password to submit' })
     }
@@ -84,6 +99,7 @@ export class Login extends Component {
         <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff' }}>
           {this.state.statusMsg}
         </p>
+        {this.state.isLoggedIn && <Redirect to='/' />}
       </div>
     )
   }
