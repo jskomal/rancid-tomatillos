@@ -10,3 +10,13 @@
   border: 1px solid var(--accent-pink);
   border-radius: 0.3rem;
 }
+
+.login-input {
+  color: #fff;
+  width: 30vw;
+  border: none;
+  background-color: var(--stack-grey);
+  border: 1px solid var(--stack-grey);
+  border-radius: 0.3rem;
+  margin: 2vh 0;
+}
