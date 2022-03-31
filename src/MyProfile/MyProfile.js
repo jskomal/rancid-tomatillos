@@ -42,9 +42,13 @@ export class MyProfile extends Component {
   render() {
     return (
       <div className='profile-view'>
-        <h3 className='profile-title'>{`${this.state.userData.name}'s Profile`}</h3>
-        <h4>Your Ratings</h4>
-        {this.state.ratings && <article>{this.state.ratings}</article>}
+        <div className='profile-title'>
+          <h3>{`${this.state.userData.name}'s Profile`}</h3>
+          <h4>Your Ratings</h4>
+        </div>
+        <div className='ratings-view'>
+          {this.state.ratings && <>{this.state.ratings}</>}
+        </div>
       </div>
     )
   }
