@@ -3,9 +3,9 @@ import Header from '../Header/Header'
 import Main from '../Main/Main'
 import SingleView from '../SingleView/SingleView'
 import Login from '../Login/Login'
+import MyProfile from '../MyProfile/MyProfile'
 import './App.css'
 import { Route, Switch } from 'react-router-dom'
-import MyProfile from '../MyProfile/MyProfile'
 
 export class App extends Component {
   constructor() {
@@ -118,7 +118,7 @@ export class App extends Component {
                   location={location.pathname}
                   isLoggedIn={this.state.isLoggedIn}
                 />
-                <MyProfile userData={this.state.userData} />
+                <MyProfile userData={this.state.userData} movies={this.state.movies} />
               </>
             )
           }}
