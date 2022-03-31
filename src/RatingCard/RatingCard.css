@@ -14,8 +14,6 @@
   text-align: center;
 }
 
-.ratings-buttons {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+.ratings-button {
+  align-self: flex-end;
 }
