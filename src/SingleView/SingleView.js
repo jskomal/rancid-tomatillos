@@ -48,13 +48,18 @@ export class SingleView extends Component {
     return this.state.currentMovie.title ? (
       <section className='single-view'>
         <h1 className='status-msg'>{this.state.errorMsg}</h1>
-        <Card
-          poster_path={poster_path}
-          title={title}
-          average_rating={average_rating}
-          release_date={release_date}
-          key={id}
-        />
+        <div>
+          <Card
+            poster_path={poster_path}
+            title={title}
+            average_rating={average_rating}
+            release_date={release_date}
+            key={id}
+          />
+        <section>
+          <button className='rating-button'>rate this movie</button>
+        </section>
+        </div>
 
         <section className='single-movie-details'>
           {backdrop_path && (
