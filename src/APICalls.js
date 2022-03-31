@@ -12,17 +12,3 @@ const fetchDataDelete = (path) => {
 }
 
 export { fetchDataGet, fetchDataDelete }
-
-// ratingCards: data.ratings.map((review) => {
-//   return (
-//     <RatingCard
-//       key={review.id}
-//       id={review.id}
-//       movie_id={review.movie_id}
-//       rating={review.rating}
-//       dateUpdated={review.updated_at}
-//       movies={this.props.movies}
-//       deleteRating={this.deleteRating}
-//     />
-//   )
-// })
