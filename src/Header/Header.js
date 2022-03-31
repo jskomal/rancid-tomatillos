@@ -36,7 +36,9 @@ export class Header extends Component {
             onChange={this.handleTextInput}
           />
         )}
-        <button className='log-button'>log in</button>
+        <Link to='/login'>
+          <button className='log-button'>log in</button>
+        </Link>
       </header>
     )
   }
