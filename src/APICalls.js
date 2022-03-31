@@ -23,4 +23,4 @@ const fetchDataPost = (path, body) => {
   })
 }
 
-export { fetchDataGet, fetchDataDelete }
+export { fetchDataGet, fetchDataDelete, fetchDataPost }
