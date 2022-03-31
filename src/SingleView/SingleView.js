@@ -56,8 +56,10 @@ export class SingleView extends Component {
             release_date={release_date}
             key={id}
           />
-        <section>
-          <button className='rating-button'>rate this movie</button>
+        <section className='review-view'>
+          <h3>your rating is: </h3>
+          // add star rating here
+          <button>rate this movie</button>
         </section>
         </div>
 
