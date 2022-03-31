@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './MyProfile.css'
 import RatingCard from '../RatingCard/RatingCard'
+import ToRate from '../ToRate/ToRate'
 
 export class MyProfile extends Component {
   constructor(props) {
@@ -24,7 +25,8 @@ export class MyProfile extends Component {
   componentDidMount() {
     this.fetchData(`/users/${this.state.userData.id}/ratings`).then((data) => {
       this.setState({
-        ratings: data.ratings.map((review) => {
+        ratings: data.ratings,
+        ratingCards: data.ratings.map((review) => {
           return (
             <RatingCard
               key={review.id}
@@ -32,6 +34,7 @@ export class MyProfile extends Component {
               rating={review.rating}
               dateRated={review.created_at}
               dateUpdated={review.updated_at}
+              movies={this.props.movies}
             />
           )
         })
@@ -44,10 +47,16 @@ export class MyProfile extends Component {
       <div className='profile-view'>
         <div className='profile-title'>
           <h3>{`${this.state.userData.name}'s Profile`}</h3>
+          <h4>Movies left to rate</h4>
+          {this.state.ratings && (
+            <div className='movies-to-rate'>
+              <ToRate ratings={this.state.ratings} movies={this.props.movies} />
+            </div>
+          )}
           <h4>Your Ratings</h4>
         </div>
         <div className='ratings-view'>
-          {this.state.ratings && <>{this.state.ratings}</>}
+          {this.state.ratings && <>{this.state.ratingCards}</>}
         </div>
       </div>
     )
