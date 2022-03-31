@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from '../Card/Card'
 import './SingleView.css'
+import { fetchDataGet } from '../APICalls'
 
 export class SingleView extends Component {
   constructor(props) {
@@ -8,25 +9,20 @@ export class SingleView extends Component {
     this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '' }
   }
 
-  fetchData = (path) => {
-    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`)
+  componentDidMount() {
+    fetchDataGet(`movies/${this.state.currentMovie.id}`)
       .then((res) => {
         if (!res.ok) {
           this.setState({ errorMsg: 'Something went wrong, try again later' })
         }
         return res.json()
       })
-      .catch((error) => {
-        throw new Error(error)
+      .then((data) => {
+        this.props.finishLoading()
+        this.setState({
+          currentMovie: { ...data.movie }
+        })
       })
-  }
-
-  componentDidMount() {
-    this.fetchData(`movies/${this.state.currentMovie.id}`).then((data) => {
-      this.setState({
-        currentMovie: { ...data.movie }
-      })
-    })
   }
 
   render() {
