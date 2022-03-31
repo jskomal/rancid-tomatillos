@@ -161,6 +161,7 @@ export class App extends Component {
                 <SingleView
                   finishLoading={this.finishLoading}
                   currentMovieID={match.params}
+                  userData={this.state.userData}
                 />
               </div>
             )
