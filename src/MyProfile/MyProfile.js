@@ -32,7 +32,6 @@ export class MyProfile extends Component {
               key={review.id}
               movie_id={review.movie_id}
               rating={review.rating}
-              dateRated={review.created_at}
               dateUpdated={review.updated_at}
               movies={this.props.movies}
             />
@@ -41,6 +40,8 @@ export class MyProfile extends Component {
       })
     })
   }
+
+  deleteRating = (id) => {}
 
   render() {
     return (
