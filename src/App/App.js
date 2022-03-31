@@ -14,7 +14,8 @@ export class App extends Component {
       filteredMovies: null,
       isLoading: true,
       isError: false,
-      userData: null
+      userData: null,
+      isLoggedIn: false
     }
   }
 
@@ -49,7 +50,7 @@ export class App extends Component {
   }
 
   toggleLogInStatus = (userData) => {
-    this.setState({ userData: userData })
+    this.setState({ isLoggedIn: true, userData: userData })
   }
 
   render() {
@@ -65,6 +66,7 @@ export class App extends Component {
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
                   location={location.pathname}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
                 {this.state.isError && (
                   <h1 className='status-msg'>
@@ -91,6 +93,7 @@ export class App extends Component {
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
                   location={location.pathname}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
                 <Login toggleLogInStatus={this.toggleLogInStatus} />
               </div>
@@ -107,6 +110,7 @@ export class App extends Component {
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
                   location={location.pathname}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
                 {this.state.isError && (
                   <h1 className='status-msg'>
