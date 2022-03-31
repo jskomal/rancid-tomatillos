@@ -14,7 +14,6 @@ export class App extends Component {
       filteredMovies: null,
       isLoading: true,
       isError: false,
-      isLoggedIn: false,
       userData: null
     }
   }
@@ -35,8 +34,10 @@ export class App extends Component {
           isLoading: false
         })
       })
-      .catch((error) => { this.setState({ isError: true })
-        throw new Error(error) })
+      .catch((error) => {
+        this.setState({ isError: true })
+        throw new Error(error)
+      })
   }
 
   filterMovies = (searchTerm) => {
@@ -48,7 +49,7 @@ export class App extends Component {
   }
 
   toggleLogInStatus = (userData) => {
-    this.setState({ isLoggedIn: !this.state.isLoggedIn, userData: userData})
+    this.setState({ userData: userData })
   }
 
   render() {
@@ -71,15 +72,10 @@ export class App extends Component {
                   </h1>
                 )}
                 {this.state.isLoading && !this.state.isError && (
-                  <h1 className='status-msg'>
-                    Loading... Grab some popcorn!
-                  </h1>
+                  <h1 className='status-msg'>Loading... Grab some popcorn!</h1>
                 )}
                 {!this.state.isLoading && !this.state.isError && (
-                  <Main
-                    movies={this.state.filteredMovies}
-                    toggleView={this.toggleView}
-                  />
+                  <Main movies={this.state.filteredMovies} toggleView={this.toggleView} />
                 )}
               </div>
             )
@@ -88,7 +84,7 @@ export class App extends Component {
         <Route
           exact
           path='/login'
-          render={( { location }) => {
+          render={({ location }) => {
             return (
               <div>
                 <Header
@@ -96,7 +92,7 @@ export class App extends Component {
                   filterMovies={this.filterMovies}
                   location={location.pathname}
                 />
-                <Login toggleLogInStatus={ this.toggleLogInStatus }/>
+                <Login toggleLogInStatus={this.toggleLogInStatus} />
               </div>
             )
           }}
@@ -117,9 +113,7 @@ export class App extends Component {
                     Server Error, try Rotten Tomatoes instead
                   </h1>
                 )}
-                <SingleView
-                  currentMovieID={match.params}
-                />
+                <SingleView currentMovieID={match.params} />
               </div>
             )
           }}

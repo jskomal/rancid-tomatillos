@@ -14,9 +14,11 @@ export class SingleView extends Component {
         if (!res.ok) {
           this.setState({ errorMsg: 'Something went wrong, try again later' })
         }
-      return res.json()
-    })
-    .catch(error => { throw new Error(error) })
+        return res.json()
+      })
+      .catch((error) => {
+        throw new Error(error)
+      })
   }
 
   componentDidMount() {
@@ -49,7 +51,7 @@ export class SingleView extends Component {
 
     return this.state.currentMovie.title ? (
       <section className='single-view'>
-      <h1 className='status-msg'>{ this.state.errorMsg }</h1>
+        <h1 className='status-msg'>{this.state.errorMsg}</h1>
         <Card
           poster_path={poster_path}
           title={title}
@@ -89,9 +91,7 @@ export class SingleView extends Component {
         </section>
       </section>
     ) : (
-      <h1 className='status-msg'>
-        Loading... Grab some popcorn!
-      </h1>
+      <h1 className='status-msg'>Loading... Grab some popcorn!</h1>
     )
   }
 }

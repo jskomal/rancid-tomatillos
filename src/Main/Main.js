@@ -1,7 +1,7 @@
 import React from 'react'
 import './Main.css'
 import Card from '../Card/Card'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 
 const Main = ({ movies, toggleView }) => {
   const cards = movies.map((movie) => (
