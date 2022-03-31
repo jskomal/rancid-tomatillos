@@ -108,7 +108,7 @@ export class App extends Component {
         />
         <Route
           exact
-          path='/my-profile'
+          path='/profile'
           render={({ location }) => {
             return (
               <>
