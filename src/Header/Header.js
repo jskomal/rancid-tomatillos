@@ -38,7 +38,7 @@ export class Header extends Component {
         )}
         <div className='logo-pair'>
           {this.props.isLoggedIn && (
-            <Link to='user-details'>
+            <Link to='my-profile'>
               <button className='log-button'>my profile</button>
             </Link>
           )}
