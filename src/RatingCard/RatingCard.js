@@ -19,10 +19,7 @@ const RatingCard = ({ movie_id, rating, dateUpdated, movies }) => {
         />
       </div>
       <p>Rating last Updated: {dayjs(dateUpdated).format('MMMM D, YYYY')}</p>
-      <div className='ratings-buttons'>
-        <button>edit rating</button>
-        <button>delete rating</button>
-      </div>
+      <button className='ratings-button'>delete rating</button>
     </section>
   )
 }
