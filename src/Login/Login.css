@@ -20,3 +20,12 @@
   border-radius: 0.3rem;
   margin: 2vh 0;
 }
+
+.login-input:hover {
+  border: 1px solid var(--accent-pink);
+}
+
+.login-button {
+  margin-top: 2vh;
+  width: 30vw;
+}
