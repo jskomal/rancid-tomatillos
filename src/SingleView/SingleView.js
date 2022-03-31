@@ -7,7 +7,7 @@ import { fetchDataGet } from '../APICalls'
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '', isModalOpen: false }
+    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '', isModalOpen: false, ratingInput: null }
   }
 
   componentDidMount() {
@@ -24,6 +24,10 @@ export class SingleView extends Component {
           currentMovie: { ...data.movie }
         })
       })
+  }
+
+  addRating = (newRating) => {
+    this.setState( { ratingInput: newRating })
   }
 
   render() {
@@ -50,6 +54,7 @@ export class SingleView extends Component {
       <section className='single-view'>
         <h1 className='status-msg'>{this.state.errorMsg}</h1>
         <Modal
+          addRating={ this.addRating }
         />
         <div>
           <Card
