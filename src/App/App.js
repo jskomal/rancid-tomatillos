@@ -5,6 +5,7 @@ import SingleView from '../SingleView/SingleView'
 import Login from '../Login/Login'
 import './App.css'
 import { Route, Switch } from 'react-router-dom'
+import MyProfile from '../MyProfile/MyProfile'
 
 export class App extends Component {
   constructor() {
@@ -97,6 +98,23 @@ export class App extends Component {
                 />
                 <Login toggleLogInStatus={this.toggleLogInStatus} />
               </div>
+            )
+          }}
+        />
+        <Route
+          exact
+          path='/my-profile'
+          render={({ location }) => {
+            return (
+              <>
+                <Header
+                  movies={this.state.movies}
+                  filterMovies={this.filterMovies}
+                  location={location.pathname}
+                  isLoggedIn={this.state.isLoggedIn}
+                />
+                <MyProfile />
+              </>
             )
           }}
         />
