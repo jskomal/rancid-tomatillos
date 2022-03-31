@@ -33,19 +33,15 @@ export class MyProfile extends Component {
   }
 
   deleteRating = (idToDelete) => {
-    fetch(
-      `https://rancid-tomatillos.herokuapp.com/api/v2/users/${this.state.userData.id}/ratings/${idToDelete}`,
-      {
-        method: 'DELETE'
-      }
-    )
-      .then((res) => {
-        console.log(res)
+    fetchDataDelete(`/users/${this.state.userData.id}/ratings/${idToDelete}`, {
+      method: 'DELETE'
+    }).then((res) => {
+      if (!res.ok) {
+        this.setState({ errorMsg: 'Something went wrong, try again later' })
+      } else {
         this.createRatingCards()
-      })
-      .catch((error) => {
-        throw new Error(error)
-      })
+      }
+    })
   }
 
   render() {
@@ -68,15 +64,16 @@ export class MyProfile extends Component {
 
     return (
       <div className='profile-view'>
+        <h1 className='status-msg'>{this.state.errorMsg}</h1>
         <div className='profile-title'>
-          <h3>{`${this.state.userData.name}'s Profile`}</h3>
-          <h4>Movies left to rate</h4>
+          <h1>{`Welcome to ${this.state.userData.name}'s Rating Room!`}</h1>
+          <h2 className='ratings-divider'>Movies left to rate</h2>
           {this.state.ratings && (
             <div className='movies-to-rate'>
               <ToRate ratings={this.state.ratings} movies={this.props.movies} />
             </div>
           )}
-          <h4>Your Ratings</h4>
+          <h1 className='ratings-divider'>Your Ratings</h1>
         </div>
         <div className='ratings-view'>{<>{ratingCards}</>}</div>
       </div>
