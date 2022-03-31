@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Card from '../Card/Card'
 import Modal from '../Modal/Modal'
 import './SingleView.css'
-import { fetchDataGet } from '../APICalls'
+import { fetchDataGet, fetchDataPost } from '../APICalls'
 
 export class SingleView extends Component {
   constructor(props) {
@@ -27,7 +27,10 @@ export class SingleView extends Component {
   }
 
   addRating = (newRating) => {
-    this.setState( { ratingInput: newRating })
+    this.setState( { ratingInput: newRating }, () => {
+      const dataToSend = { movie_id: this.state.currentMovie.id, rating: this.state.ratingInput }
+      fetchDataPost(`/users/${this.props.userData.id}/ratings`, dataToSend)
+    })
   }
 
   render() {
