@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from '../Card/Card'
 import './SingleView.css'
+import { fetchDataGet } from '../APICalls'
 
 export class SingleView extends Component {
   constructor(props) {
@@ -8,23 +9,20 @@ export class SingleView extends Component {
     this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '' }
   }
 
-  fetchData = (path) => {
-    return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`)
+  componentDidMount() {
+    fetchDataGet(`movies/${this.state.currentMovie.id}`)
       .then((res) => {
         if (!res.ok) {
           this.setState({ errorMsg: 'Something went wrong, try again later' })
         }
-      return res.json()
-    })
-    .catch(error => { throw new Error(error) })
-  }
-
-  componentDidMount() {
-    this.fetchData(`movies/${this.state.currentMovie.id}`).then((data) => {
-      this.setState({
-        currentMovie: { ...data.movie }
+        return res.json()
       })
-    })
+      .then((data) => {
+        this.props.finishLoading()
+        this.setState({
+          currentMovie: { ...data.movie }
+        })
+      })
   }
 
   render() {
@@ -49,7 +47,7 @@ export class SingleView extends Component {
 
     return this.state.currentMovie.title ? (
       <section className='single-view'>
-      <h1 className='status-msg'>{ this.state.errorMsg }</h1>
+        <h1 className='status-msg'>{this.state.errorMsg}</h1>
         <Card
           poster_path={poster_path}
           title={title}
@@ -89,9 +87,7 @@ export class SingleView extends Component {
         </section>
       </section>
     ) : (
-      <h1 className='status-msg'>
-        Loading... Grab some popcorn!
-      </h1>
+      <h1 className='status-msg'>Loading... Grab some popcorn!</h1>
     )
   }
 }

@@ -11,8 +11,9 @@ export class Header extends Component {
   }
 
   handleTextInput = (event) => {
-    this.setState({ searchValue: event.target.value })
-    this.props.filterMovies(this.state.searchValue)
+    this.setState({ searchValue: event.target.value }, () =>
+      this.props.filterMovies(this.state.searchValue)
+    )
   }
 
   render() {
@@ -36,7 +37,16 @@ export class Header extends Component {
             onChange={this.handleTextInput}
           />
         )}
-        <button className='log-button'>log in</button>
+        <div className='logo-pair'>
+          {this.props.isLoggedIn && (
+            <Link to='profile'>
+              <button className='log-button'>my profile</button>
+            </Link>
+          )}
+          <Link to='/login'>
+            <button className='log-button'>log in</button>
+          </Link>
+        </div>
       </header>
     )
   }

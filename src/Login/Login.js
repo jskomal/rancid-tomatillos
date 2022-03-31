@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import './Login.css'
 
 export class Login extends Component {
   constructor() {
     super()
-    this.state = { email:'', password:'', statusMsg:'', hasError: false }
+    this.state = {
+      email: '',
+      password: '',
+      statusMsg: '',
+      hasError: false,
+      isLoggedIn: false
+    }
   }
 
   handleTextInput = (e) => {
@@ -16,10 +23,10 @@ export class Login extends Component {
   }
 
   clearInputs = () => {
-    this.setState({ email : '', password: ''})
+    this.setState({ email: '', password: '' })
   }
 
-  submitLogin = (e) => {
+  submitLogIn = (e) => {
     e.preventDefault()
     if (this.validateInputs()) {
       fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
@@ -29,26 +36,40 @@ export class Login extends Component {
         },
         body: JSON.stringify({ email: this.state.email, password: this.state.password })
       })
-      .then(res => {
-        if (res.status === 403) {
+        .then((res) => {
+          if (res.status === 403) {
+            this.clearInputs()
+            this.setState({
+              statusMsg: 'Incorrect email and password combination',
+              hasError: true
+            })
+            throw new Error(res.status)
+          } else if (!res.ok) {
+            this.clearInputs()
+            this.setState({
+              statusMsg: 'Something went wrong, please try again later',
+              hasError: true
+            })
+            throw new Error(res.status)
+          } else {
+            return res.json()
+          }
+        })
+        .then((data) => {
+          this.props.toggleLogInStatus(data.user)
           this.clearInputs()
-          this.setState({ statusMsg: 'Incorrect email and password combination', hasError: true })
-          throw new Error(res.status)
-        } else if (!res.ok) {
-          this.clearInputs()
-          this.setState({ statusMsg: 'Something went wrong, please try again later', hasError: true })
-          throw new Error(res.status)
-        } else {
-          return res.json()
-        }
-      })
-      .then(data => {
-        this.props.toggleLogInStatus(data.user)
-        this.clearInputs()
-        this.setState({ hasError: false, statusMsg: 'SUCCESS!' })
-      })
+          this.setState({
+            hasError: false,
+            statusMsg: 'Success, Routing you to the home page!'
+          })
+        })
+        .then(() =>
+          setTimeout(() => {
+            this.setState({ isLoggedIn: true })
+          }, 1000)
+        )
     } else {
-      this.setState({ statusMsg: 'You must provide an email and password to submit'})
+      this.setState({ statusMsg: 'You must provide an email and password to submit' })
     }
   }
 
@@ -61,19 +82,24 @@ export class Login extends Component {
           type='text'
           name='email'
           placeholder='email address'
-          value={ this.state.email }
-          onChange={ this.handleTextInput }
+          value={this.state.email}
+          onChange={this.handleTextInput}
         />
         <input
           className='login-input'
           type='password'
           name='password'
           placeholder='password'
-          value={ this.state.password }
-          onChange={ this.handleTextInput }
+          value={this.state.password}
+          onChange={this.handleTextInput}
         />
-        <button className='login-button' onClick={ this.submitLogIn }>log in</button>
-        <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff'}}>{ this.state.statusMsg }</p>
+        <button className='login-button' onClick={this.submitLogIn}>
+          log in
+        </button>
+        <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff' }}>
+          {this.state.statusMsg}
+        </p>
+        {this.state.isLoggedIn && <Redirect to='/' />}
       </div>
     )
   }

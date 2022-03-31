@@ -1,0 +1,22 @@
+.profile-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-title {
+  text-align: center;
+}
+
+.ratings-view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.ratings-divider {
+  width: 100%;
+  background-color: var(--stack-dark-blue);
+  border-radius: 0.3rem;
+  margin: 1.5rem 0;
+}
