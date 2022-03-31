@@ -3,7 +3,7 @@ import StarRatings from 'react-star-ratings/build/star-ratings'
 import dayjs from 'dayjs'
 import './RatingCard.css'
 
-const RatingCard = ({ movie_id, rating, dateRated, dateUpdated, movies }) => {
+const RatingCard = ({ movie_id, rating, dateUpdated, movies }) => {
   const currentMovie = movies.find((movie) => movie_id === movie.id)
 
   return (
@@ -18,8 +18,7 @@ const RatingCard = ({ movie_id, rating, dateRated, dateUpdated, movies }) => {
           starRatedColor='goldenrod'
         />
       </div>
-      <p>Rated on: {dayjs(dateRated).format('MMM D, YY')}</p>
-      <p>Last Updated: {dayjs(dateUpdated).format('MMM D, YY')}</p>
+      <p>Rating last Updated: {dayjs(dateUpdated).format('MMMM D, YYYY')}</p>
       <div className='ratings-buttons'>
         <button>edit rating</button>
         <button>delete rating</button>
