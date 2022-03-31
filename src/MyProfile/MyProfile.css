@@ -1,0 +1,15 @@
+.profile-view {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile-title {
+  text-align: center;
+}
+
+.ratings-view {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
