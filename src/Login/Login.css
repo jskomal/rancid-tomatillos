@@ -1,0 +1,31 @@
+.login-view {
+  width: 75vh;
+  height: 50vh;
+  margin: 3vh auto;
+  background-color: var(--stack-dark-blue);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--accent-pink);
+  border-radius: 0.3rem;
+}
+
+.login-input {
+  color: #fff;
+  width: 30vw;
+  border: none;
+  background-color: var(--stack-grey);
+  border: 1px solid var(--stack-grey);
+  border-radius: 0.3rem;
+  margin: 2vh 0;
+}
+
+.login-input:hover {
+  border: 1px solid var(--accent-pink);
+}
+
+.login-button {
+  margin-top: 2vh;
+  width: 30vw;
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../Header/Header'
 import Main from '../Main/Main'
 import SingleView from '../SingleView/SingleView'
+import Login from '../Login/Login'
 import './App.css'
 import { Route, Switch } from 'react-router-dom'
 
@@ -12,7 +13,9 @@ export class App extends Component {
       movies: null,
       filteredMovies: null,
       isLoading: true,
-      isError: false
+      isError: false,
+      isLoggedIn: false,
+      userData: null
     }
   }
 
@@ -42,6 +45,10 @@ export class App extends Component {
         movie.title.toLowerCase().includes(searchTerm.toLowerCase())
       )
     })
+  }
+
+  toggleLogInStatus = (userData) => {
+    this.setState({ isLoggedIn: !this.state.isLoggedIn, userData: userData})
   }
 
   render() {
@@ -74,6 +81,22 @@ export class App extends Component {
                     toggleView={this.toggleView}
                   />
                 )}
+              </div>
+            )
+          }}
+        />
+        <Route
+          exact
+          path='/login'
+          render={( { location }) => {
+            return (
+              <div>
+                <Header
+                  movies={this.state.movies}
+                  filterMovies={this.filterMovies}
+                  location={location.pathname}
+                />
+                <Login toggleLogInStatus={ this.toggleLogInStatus }/>
               </div>
             )
           }}
