@@ -36,9 +36,16 @@ export class Header extends Component {
             onChange={this.handleTextInput}
           />
         )}
-        <Link to='/login'>
-          <button className='log-button'>log in</button>
-        </Link>
+        <div className='logo-pair'>
+          {this.props.isLoggedIn && (
+            <Link to='user-details'>
+              <button className='log-button'>my profile</button>
+            </Link>
+          )}
+          <Link to='/login'>
+            <button className='log-button'>log in</button>
+          </Link>
+        </div>
       </header>
     )
   }
