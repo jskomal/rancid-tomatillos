@@ -13,4 +13,14 @@ const fetchDataDelete = (path) => {
   })
 }
 
+const fetchDataPost = (path, body) => {
+  return fetch(`https://rancid-tomatillos.herokuapp.com/api/v2/${path}`, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  }).catch((error) => {
+    throw new Error(error)
+  })
+}
+
 export { fetchDataGet, fetchDataDelete }
