@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import Card from '../Card/Card'
+import Modal from '../Modal/Modal'
 import './SingleView.css'
 import { fetchDataGet } from '../APICalls'
 
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '' }
+    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '', isModalOpen: false }
   }
 
   componentDidMount() {
@@ -48,6 +49,8 @@ export class SingleView extends Component {
     return this.state.currentMovie.title ? (
       <section className='single-view'>
         <h1 className='status-msg'>{this.state.errorMsg}</h1>
+        <Modal
+        />
         <div>
           <Card
             poster_path={poster_path}
@@ -58,7 +61,7 @@ export class SingleView extends Component {
           />
         <section className='review-view'>
           <h3>your rating is: </h3>
-          // add star rating here
+          {/* add star rating here */}
           <button>rate this movie</button>
         </section>
         </div>
