@@ -113,7 +113,7 @@ export class App extends Component {
                   location={location.pathname}
                   isLoggedIn={this.state.isLoggedIn}
                 />
-                <MyProfile />
+                <MyProfile userData={this.state.userData} />
               </>
             )
           }}
