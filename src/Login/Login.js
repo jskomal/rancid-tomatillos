@@ -19,7 +19,7 @@ export class Login extends Component {
     this.setState({ email: '', password: '' })
   }
 
-  submitLogin = (e) => {
+  submitLogIn = (e) => {
     e.preventDefault()
     if (this.validateInputs()) {
       fetch('https://rancid-tomatillos.herokuapp.com/api/v2/login', {
