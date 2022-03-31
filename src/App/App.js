@@ -43,10 +43,15 @@ export class App extends Component {
   }
 
   filterMovies = (searchTerm) => {
-    this.setState({
-      filteredMovies: this.state.movies.filter((movie) =>
-        movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    this.setState(() => {
+      if (searchTerm === '') {
+        return { filteredMovies: this.state.movies }
+      }
+      return {
+        filteredMovies: this.state.movies.filter((movie) =>
+          movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      }
     })
   }
 

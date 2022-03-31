@@ -11,8 +11,9 @@ export class Header extends Component {
   }
 
   handleTextInput = (event) => {
-    this.setState({ searchValue: event.target.value })
-    this.props.filterMovies(this.state.searchValue)
+    this.setState({ searchValue: event.target.value }, () =>
+      this.props.filterMovies(this.state.searchValue)
+    )
   }
 
   render() {
