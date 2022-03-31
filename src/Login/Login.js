@@ -66,7 +66,7 @@ export class Login extends Component {
         .then(() =>
           setTimeout(() => {
             this.setState({ isLoggedIn: true })
-          }, 2000)
+          }, 1000)
         )
     } else {
       this.setState({ statusMsg: 'You must provide an email and password to submit' })
