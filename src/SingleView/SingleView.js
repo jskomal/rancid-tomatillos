@@ -30,7 +30,18 @@ export class SingleView extends Component {
     this.setState( { ratingInput: newRating }, () => {
       const dataToSend = { movie_id: this.state.currentMovie.id, rating: this.state.ratingInput }
       fetchDataPost(`/users/${this.props.userData.id}/ratings`, dataToSend)
+      .then((res) => {
+        if (!res.ok) {
+          this.setState({ errorMsg: 'Something went wrong, try again later', isModalOpen: false })
+        }
+        this.setState( {isModalOpen: false})
+        return res.json()
+      })
     })
+  }
+
+  openModal = () => {
+    this.setState({ isModalOpen: true })
   }
 
   render() {
@@ -56,9 +67,9 @@ export class SingleView extends Component {
     return this.state.currentMovie.title ? (
       <section className='single-view'>
         <h1 className='status-msg'>{this.state.errorMsg}</h1>
-        <Modal
+        {this.state.isModalOpen && <Modal
           addRating={ this.addRating }
-        />
+        />}
         <div>
           <Card
             poster_path={poster_path}
@@ -70,7 +81,7 @@ export class SingleView extends Component {
         <section className='review-view'>
           <h3>your rating is: </h3>
           {/* add star rating here */}
-          <button>rate this movie</button>
+          <button onClick={ this.openModal }>rate this movie</button>
         </section>
         </div>
 
