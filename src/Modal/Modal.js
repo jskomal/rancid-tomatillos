@@ -15,6 +15,7 @@ export class Modal extends Component {
     return(
     <div className='modal-view' onClick={ this.props.toggleModal }>
       <div className='modal'>
+        <button className='close-button'>{'\u2573'}</button>
         <h2>add your rating</h2>
         <p>out of 10</p>
         <input type='number' name='ratingValue' min='1' max='10' step='1' value={ this.state.ratingValue } onChange={ this.handleInput }/>
