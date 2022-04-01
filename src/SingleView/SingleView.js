@@ -8,7 +8,12 @@ import { fetchDataGet, fetchDataPost } from '../APICalls'
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '', isModalOpen: false, ratingInput: null }
+    this.state = {
+      currentMovie: { id: props.currentMovieID.id },
+      errorMsg: '',
+      isModalOpen: false,
+      ratingInput: null
+    }
   }
 
   componentDidMount() {
@@ -29,14 +34,19 @@ export class SingleView extends Component {
 
   addRating = (newRating) => {
     // add input error handling
-    this.setState( { ratingInput: newRating }, () => {
-      const dataToSend = { movie_id: parseInt(this.state.currentMovie.id), rating: parseInt(this.state.ratingInput) }
-      fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend)
-      .then((res) => {
+    this.setState({ ratingInput: newRating }, () => {
+      const dataToSend = {
+        movie_id: parseInt(this.state.currentMovie.id),
+        rating: parseInt(this.state.ratingInput)
+      }
+      fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend).then((res) => {
         if (!res.ok) {
-          this.setState({ errorMsg: 'Something went wrong, try again later', isModalOpen: false })
+          this.setState({
+            errorMsg: 'Something went wrong, try again later',
+            isModalOpen: false
+          })
         }
-        this.setState( {isModalOpen: false})
+        this.setState({ isModalOpen: false })
         return res.json()
       })
     })
@@ -69,10 +79,9 @@ export class SingleView extends Component {
     return this.state.currentMovie.title ? (
       <section className='single-view'>
         <h1 className='status-msg'>{this.state.errorMsg}</h1>
-        {this.state.isModalOpen && <Modal
-          addRating={ this.addRating }
-          toggleModal={ this.toggleModal }
-        />}
+        {this.state.isModalOpen && (
+          <Modal addRating={this.addRating} toggleModal={this.toggleModal} />
+        )}
         <div>
           <Card
             poster_path={poster_path}

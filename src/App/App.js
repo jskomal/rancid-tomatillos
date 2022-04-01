@@ -58,7 +58,8 @@ export class App extends Component {
       } else {
         return {
           filteredMovies: this.state.movies.filter((movie) =>
-          movie.title.toLowerCase().includes(searchTerm.toLowerCase()))
+            movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+          )
         }
       }
     })
