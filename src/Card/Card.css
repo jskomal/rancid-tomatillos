@@ -24,6 +24,7 @@
 .poster-img {
   max-height: 55vh;
   border-radius: 0.8rem;
+  box-shadow: 0 0 20px black;
 }
 
 .poster-title {
