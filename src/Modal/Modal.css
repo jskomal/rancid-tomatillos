@@ -1,0 +1,14 @@
+
+
+.modal {
+  position: fixed;
+  top: 12vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 60vw;
+  height: 60vh;
+  background-color: var(--stack-dark-blue);
+  border-radius: 0.3rem;
+}
