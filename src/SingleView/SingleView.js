@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Card from '../Card/Card'
 import Modal from '../Modal/Modal'
+import StarRatings from 'react-star-ratings/build/star-ratings'
 import './SingleView.css'
 import { fetchDataGet, fetchDataPost } from '../APICalls'
 
@@ -79,14 +80,6 @@ export class SingleView extends Component {
             release_date={release_date}
             key={id}
           />
-          <div className='stars'>
-            <StarRatings
-              rating={this.state.ratingValue / 2}
-              starDimension='3vw'
-              starSpacing='0'
-              starRatedColor='goldenrod'
-            />
-          </div>
           {this.props.isLoggedIn && ( // add an && for this movie not reviewed
             <section className='review-view'>
               <h3>your rating is: </h3>
