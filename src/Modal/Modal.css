@@ -22,3 +22,12 @@
   border-radius: 0.3rem;
   padding: 0.5rem 0;
 }
+
+.close-button {
+  align-self: flex-end;
+  justify-self: flex-start;
+  font-family: Arial, Helvetica, sans-serif;
+  width: 2vw;
+  height: 2vw;
+  text-align: center;
+}
