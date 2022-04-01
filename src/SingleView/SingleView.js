@@ -28,6 +28,7 @@ export class SingleView extends Component {
   }
 
   addRating = (newRating) => {
+    // add input error handling
     this.setState( { ratingInput: newRating }, () => {
       const dataToSend = { movie_id: parseInt(this.state.currentMovie.id), rating: parseInt(this.state.ratingInput) }
       fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend)
