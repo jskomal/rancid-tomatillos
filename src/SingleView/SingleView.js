@@ -29,7 +29,7 @@ export class SingleView extends Component {
   addRating = (newRating) => {
     this.setState( { ratingInput: newRating }, () => {
       const dataToSend = { movie_id: this.state.currentMovie.id, rating: this.state.ratingInput }
-      fetchDataPost(`/users/${this.props.userData.id}/ratings`, dataToSend)
+      fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend)
       .then((res) => {
         if (!res.ok) {
           this.setState({ errorMsg: 'Something went wrong, try again later', isModalOpen: false })
