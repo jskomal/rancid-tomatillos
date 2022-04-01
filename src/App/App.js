@@ -55,11 +55,11 @@ export class App extends Component {
     this.setState(() => {
       if (searchTerm === '') {
         return { filteredMovies: this.state.movies }
-      }
-      return {
-        filteredMovies: this.state.movies.filter((movie) =>
-          movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+      } else {
+        return {
+          filteredMovies: this.state.movies.filter((movie) =>
+          movie.title.toLowerCase().includes(searchTerm.toLowerCase()))
+        }
       }
     })
   }
