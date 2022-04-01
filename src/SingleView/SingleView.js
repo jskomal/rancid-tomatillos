@@ -1,12 +1,19 @@
 import React, { Component } from 'react'
 import Card from '../Card/Card'
+import Modal from '../Modal/Modal'
+import StarRatings from 'react-star-ratings/build/star-ratings'
 import './SingleView.css'
-import { fetchDataGet } from '../APICalls'
+import { fetchDataGet, fetchDataPost } from '../APICalls'
 
 export class SingleView extends Component {
   constructor(props) {
     super(props)
-    this.state = { currentMovie: { id: props.currentMovieID.id }, errorMsg: '' }
+    this.state = {
+      currentMovie: { id: props.currentMovieID.id },
+      errorMsg: '',
+      isModalOpen: false,
+      ratingInput: null
+    }
   }
 
   componentDidMount() {
@@ -23,6 +30,30 @@ export class SingleView extends Component {
           currentMovie: { ...data.movie }
         })
       })
+  }
+
+  addRating = (newRating) => {
+    // add input error handling
+    this.setState({ ratingInput: newRating }, () => {
+      const dataToSend = {
+        movie_id: parseInt(this.state.currentMovie.id),
+        rating: parseInt(this.state.ratingInput)
+      }
+      fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend).then((res) => {
+        if (!res.ok) {
+          this.setState({
+            errorMsg: 'Something went wrong, try again later',
+            isModalOpen: false
+          })
+        }
+        this.setState({ isModalOpen: false })
+        return res.json()
+      })
+    })
+  }
+
+  toggleModal = () => {
+    this.setState({ isModalOpen: !this.state.isModalOpen })
   }
 
   render() {
@@ -48,13 +79,30 @@ export class SingleView extends Component {
     return this.state.currentMovie.title ? (
       <section className='single-view'>
         <h1 className='status-msg'>{this.state.errorMsg}</h1>
-        <Card
-          poster_path={poster_path}
-          title={title}
-          average_rating={average_rating}
-          release_date={release_date}
-          key={id}
-        />
+        {this.state.isModalOpen && (
+          <Modal addRating={this.addRating} toggleModal={this.toggleModal} />
+        )}
+        <div>
+          <Card
+            poster_path={poster_path}
+            title={title}
+            average_rating={average_rating}
+            release_date={release_date}
+            key={id}
+          />
+          {this.props.isLoggedIn && ( // add an && for this movie not reviewed
+            <section className='review-view'>
+              <h3>your rating is: </h3>
+              <StarRatings
+                rating={this.state.ratingInput / 2}
+                starDimension='3vw'
+                starSpacing='0'
+                starRatedColor='goldenrod'
+              />
+              <button onClick={this.toggleModal}>rate this movie</button>
+            </section>
+          )}
+        </div>
 
         <section className='single-movie-details'>
           {backdrop_path && (

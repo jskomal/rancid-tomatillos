@@ -55,11 +55,12 @@ export class App extends Component {
     this.setState(() => {
       if (searchTerm === '') {
         return { filteredMovies: this.state.movies }
-      }
-      return {
-        filteredMovies: this.state.movies.filter((movie) =>
-          movie.title.toLowerCase().includes(searchTerm.toLowerCase())
-        )
+      } else {
+        return {
+          filteredMovies: this.state.movies.filter((movie) =>
+            movie.title.toLowerCase().includes(searchTerm.toLowerCase())
+          )
+        }
       }
     })
   }
@@ -90,7 +91,7 @@ export class App extends Component {
                   <h1 className='status-msg'>Loading... Grab some popcorn!</h1>
                 )}
                 {!this.state.isLoading && !this.state.isError && (
-                  <Main movies={this.state.filteredMovies} toggleView={this.toggleView} />
+                  <Main movies={this.state.filteredMovies} />
                 )}
               </div>
             )
@@ -161,6 +162,7 @@ export class App extends Component {
                 <SingleView
                   finishLoading={this.finishLoading}
                   currentMovieID={match.params}
+                  userData={this.state.userData}
                 />
               </div>
             )
