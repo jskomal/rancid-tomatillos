@@ -90,7 +90,7 @@ export class App extends Component {
                   <h1 className='status-msg'>Loading... Grab some popcorn!</h1>
                 )}
                 {!this.state.isLoading && !this.state.isError && (
-                  <Main movies={this.state.filteredMovies} toggleView={this.toggleView} />
+                  <Main movies={this.state.filteredMovies} />
                 )}
               </div>
             )
