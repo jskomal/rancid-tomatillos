@@ -79,11 +79,26 @@ export class SingleView extends Component {
             release_date={release_date}
             key={id}
           />
-        <section className='review-view'>
-          <h3>your rating is: </h3>
-          {/* add star rating here */}
-          <button onClick={ this.toggleModal }>rate this movie</button>
-        </section>
+          <div className='stars'>
+            <StarRatings
+              rating={this.state.ratingValue / 2}
+              starDimension='3vw'
+              starSpacing='0'
+              starRatedColor='goldenrod'
+            />
+          </div>
+          {this.props.isLoggedIn && ( // add an && for this movie not reviewed
+            <section className='review-view'>
+              <h3>your rating is: </h3>
+              <StarRatings
+                rating={this.state.ratingInput / 2}
+                starDimension='3vw'
+                starSpacing='0'
+                starRatedColor='goldenrod'
+              />
+              <button onClick={this.toggleModal}>rate this movie</button>
+            </section>
+          )}
         </div>
 
         <section className='single-movie-details'>
