@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import StarRatings from 'react-star-ratings/build/star-ratings'
 import './Modal.css'
 
 export class Modal extends Component {
