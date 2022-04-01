@@ -40,8 +40,8 @@ export class SingleView extends Component {
     })
   }
 
-  openModal = () => {
-    this.setState({ isModalOpen: true })
+  toggleModal = () => {
+    this.setState({ isModalOpen: !this.state.isModalOpen })
   }
 
   render() {
@@ -69,6 +69,7 @@ export class SingleView extends Component {
         <h1 className='status-msg'>{this.state.errorMsg}</h1>
         {this.state.isModalOpen && <Modal
           addRating={ this.addRating }
+          toggleModal={ this.toggleModal }
         />}
         <div>
           <Card
@@ -81,7 +82,7 @@ export class SingleView extends Component {
         <section className='review-view'>
           <h3>your rating is: </h3>
           {/* add star rating here */}
-          <button onClick={ this.openModal }>rate this movie</button>
+          <button onClick={ this.toggleModal }>rate this movie</button>
         </section>
         </div>
 
