@@ -13,7 +13,7 @@ export class Modal extends Component {
 
   render() {
     return(
-    <div className='modal-view'>
+    <div className='modal-view' onClick={ this.props.toggleModal }>
       <div className='modal'>
         <h2>add your rating</h2>
         <p>out of 10</p>
