@@ -4,7 +4,7 @@ import './Modal.css'
 export class Modal extends Component {
   constructor() {
     super()
-    this.state = { ratingValue: 1 }
+    this.state = { ratingValue: '5' }
   }
 
   handleInput = (e) => {
