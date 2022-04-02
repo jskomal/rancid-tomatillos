@@ -116,4 +116,12 @@ describe('Single Movie View tests', () => {
 
     cy.get('.movie-detail-error').contains('No information is available for this movie')
   })
+
+  it('should render an error message if the server is not reachable', () => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/337401',
+    {statusCode: 500}
+  ).as('serverError')
+  cy.visit('http://localhost:3000/337401')
+  .get('.page-container').contains('Something went wrong, try again later')
+  })
 })
