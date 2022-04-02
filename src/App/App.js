@@ -26,6 +26,7 @@ export class App extends Component {
     fetchDataGet('movies')
       .then((res) => {
         if (!res.ok) {
+          this.finishLoading()
           this.setState(
             {
               isError: true,
@@ -77,7 +78,7 @@ export class App extends Component {
           path='/'
           render={({ location }) => {
             return (
-              <div>
+              <div className='page-container'>
                 <Header
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
