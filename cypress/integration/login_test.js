@@ -1,6 +1,6 @@
 describe('Login Flow Test', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/', {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
       statusCode: 201,
       body: {
         movies: [
@@ -37,4 +37,15 @@ describe('Login Flow Test', () => {
       }
     }).as('movies')
   })
+
+  it('should have a title and inputs for email and password', () => {
+    cy.visit('http://localhost:3000')
+    cy.get('#logButton')
+    .click()
+    .get('.login-view')
+    .contains('Log In')
+    .get('[name="email"]').should('be.visible')
+    .get('[name="password"]').should('be.visible')
+  })
+
 })
