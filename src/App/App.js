@@ -101,7 +101,7 @@ export class App extends Component {
           path='/login'
           render={({ location }) => {
             return (
-              <div>
+              <div className='page-container'>
                 <Header
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
@@ -124,7 +124,7 @@ export class App extends Component {
           path='/profile'
           render={({ location }) => {
             return (
-              <>
+              <div className='page-container'>
                 <Header
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
@@ -139,7 +139,7 @@ export class App extends Component {
                   userData={this.state.userData}
                   movies={this.state.movies}
                 />
-              </>
+              </div>
             )
           }}
         />
@@ -148,7 +148,7 @@ export class App extends Component {
           path='/:id'
           render={({ match, location }) => {
             return (
-              <div>
+              <div className='page-container'>
                 <Header
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
