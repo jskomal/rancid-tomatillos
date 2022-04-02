@@ -3,7 +3,7 @@ import Card from '../Card/Card'
 import Modal from '../Modal/Modal'
 import StarRatings from 'react-star-ratings/build/star-ratings'
 import './SingleView.css'
-import { fetchDataGet, fetchDataPost } from '../APICalls'
+import { fetchDataGet, fetchDataPost, fetchDataDelete } from '../APICalls'
 
 export class SingleView extends Component {
   constructor(props) {
@@ -32,8 +32,18 @@ export class SingleView extends Component {
       })
   }
 
+  deleteRating = (currentMovieID) => {
+    fetchDataDelete(`/users/${this.props.userData.id}/ratings/${currentMovieID}`).then(
+      (res) => {
+        if (!res.ok) {
+          this.setState({ errorMsg: 'Something went wrong, try again later' })
+        }
+      }
+    )
+  }
+
   addRating = (newRating) => {
-    // add input error handling
+    this.deleteRating(this.state.currentMovie.id)
     this.setState({ ratingInput: newRating }, () => {
       const dataToSend = {
         movie_id: parseInt(this.state.currentMovie.id),
