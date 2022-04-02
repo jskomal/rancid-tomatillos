@@ -163,6 +163,7 @@ export class App extends Component {
                   finishLoading={this.finishLoading}
                   currentMovieID={match.params}
                   userData={this.state.userData}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               </div>
             )

@@ -100,7 +100,7 @@ export class SingleView extends Component {
             release_date={release_date}
             key={id}
           />
-          {this.props.isLoggedIn && ( // add an && for this movie not reviewed
+          {this.props.isLoggedIn && ( 
             <section className='review-view'>
               <h3>your rating is: </h3>
               <StarRatings
