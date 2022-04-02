@@ -55,4 +55,12 @@ describe('Login Flow Test', () => {
     .get('.login-button').click()
     .get('.login-view').contains('Success, Routing you to the home page!')
   })
+
+  it('should show an error message if login is unsuccessful', () => {
+    cy.intercept('POST', 'https://rancid-tomatillos.herokuapp.com/api/v2/login', {statusCode: 403}).as('Log In')
+    .get('[name="email"]').type('charlie@turing.io')
+    .get('[name="password"]').type('password')
+    .get('.login-button').click()
+    .get('.login-view').contains('Incorrect email and password combination')
+  })
 })
