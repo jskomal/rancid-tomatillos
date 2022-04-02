@@ -58,9 +58,25 @@ describe('Login Flow Test', () => {
 
   it('should show an error message if login is unsuccessful', () => {
     cy.intercept('POST', 'https://rancid-tomatillos.herokuapp.com/api/v2/login', {statusCode: 403}).as('Log In')
+    .visit('http://localhost:3000/login')
     .get('[name="email"]').type('charlie@turing.io')
     .get('[name="password"]').type('password')
     .get('.login-button').click()
     .get('.login-view').contains('Incorrect email and password combination')
+  })
+
+  it('should show an error message if there is a server error', () => {
+    cy.intercept('POST', 'https://rancid-tomatillos.herokuapp.com/api/v2/login', {statusCode: 500}).as('Log In')
+    .visit('http://localhost:3000/login')
+    .get('[name="email"]').type('charlie@turing.io')
+    .get('[name="password"]').type('password')
+    .get('.login-button').click()
+    .get('.login-view').contains('Something went wrong, please try again later')
+  })
+
+  it('should require both inputs to be filled for submission', () => {
+    cy.visit('http://localhost:3000/login')
+    .get('.login-button').click()
+    .get('.login-view').contains('You must provide an email and password to submit')
   })
 })
