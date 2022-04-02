@@ -31,13 +31,11 @@ export class App extends Component {
             {
               isError: true,
               errorMsg: 'Server Error, try Rotten Tomatoes instead'
-            },
-            () => {
-              throw new Error(res.status)
             }
           )
+        } else {
+          return res.json()
         }
-        return res.json()
       })
       .then((data) => {
         this.setState({
