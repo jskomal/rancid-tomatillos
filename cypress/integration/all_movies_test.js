@@ -36,11 +36,11 @@ describe('All Movies View Tests', () => {
         ]
       }
     }).as('movies')
-
-    cy.visit('http://localhost:3000/')
   })
 
   it('Should have a header with a title, home button, search bar, and log in button', () => {
+    cy.visit('http://localhost:3000/')
+    
     cy.get('header').contains('rancid tomatillos')
 
     cy.get('.home-button').contains('home')
