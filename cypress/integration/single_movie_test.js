@@ -80,11 +80,11 @@ describe('Single Movie View tests', () => {
         }
       }
     }).as('maraton')
-
-    cy.visit('http://localhost:3000/').get('img[alt="The New Mutants poster"]').click()
   })
 
   it('should display the same card from the main page', () => {
+    cy.visit('http://localhost:3000/').get('img[alt="The New Mutants poster"]').click()
+
     cy.get('img[alt="The New Mutants poster"]').should('be.visible')
 
     cy.get('.poster-title').contains('The New Mutants')
