@@ -10,7 +10,7 @@ export class SingleView extends Component {
     super(props)
     this.state = {
       currentMovie: { id: props.currentMovieID.id },
-      errorMsg: '',
+      errorMsg: 'Loading... Grab some popcorn!',
       isModalOpen: false,
       ratingInput: null
     }
@@ -20,6 +20,7 @@ export class SingleView extends Component {
     fetchDataGet(`movies/${this.state.currentMovie.id}`)
       .then((res) => {
         if (!res.ok) {
+          this.props.finishLoading()
           this.setState({ errorMsg: 'Something went wrong, try again later' })
         }
         return res.json()
@@ -100,7 +101,7 @@ export class SingleView extends Component {
             release_date={release_date}
             key={id}
           />
-          {this.props.isLoggedIn && ( 
+          {this.props.isLoggedIn && (
             <section className='review-view'>
               <h3>your rating is: </h3>
               <StarRatings
@@ -145,7 +146,7 @@ export class SingleView extends Component {
         </section>
       </section>
     ) : (
-      <h1 className='status-msg'>Loading... Grab some popcorn!</h1>
+      <h1 className='status-msg'>{ this.state.errorMsg }</h1>
     )
   }
 }
