@@ -44,7 +44,7 @@ export class Header extends Component {
             </Link>
           )}
           <Link to='/login'>
-            <button className='log-button'>log in</button>
+            <button className='log-button' id='logButton'>log in</button>
           </Link>
         </div>
       </header>
