@@ -48,4 +48,11 @@ describe('Login Flow Test', () => {
     .get('[name="password"]').should('be.visible')
   })
 
+  it('should be able to login successfully', () => {
+    cy.intercept('POST', 'https://rancid-tomatillos.herokuapp.com/api/v2/login', {statusCode: 201, body: {user: {id: 81, name: "Charlie", email: "charlie@turing.io"}}}).as('Log In')
+    .get('[name="email"]').type('charlie@turing.io')
+    .get('[name="password"]').type('qwerty')
+    .get('.login-button').click()
+    .get('.login-view').contains('Success, Routing you to the home page!')
+  })
 })
