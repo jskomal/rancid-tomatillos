@@ -4,20 +4,22 @@ import Card from '../Card/Card'
 import { Link } from 'react-router-dom'
 
 const Main = ({ movies, toggleView }) => {
-  const cards = movies.map((movie) => (
-    <Link className='card-link' to={`/${movie.id}`} key={movie.id}>
+  let cards = []
+  if (movies) {
+    cards = movies.map((movie) => (
+      <Link className='card-link' to={`/${movie.id}`} key={movie.id}>
       <Card
-        id={movie.id}
-        poster_path={movie.poster_path}
-        title={movie.title}
-        average_rating={movie.average_rating}
-        release_date={movie.release_date}
-        key={movie.id}
-        toggleView={toggleView}
+      id={movie.id}
+      poster_path={movie.poster_path}
+      title={movie.title}
+      average_rating={movie.average_rating}
+      release_date={movie.release_date}
+      key={movie.id}
+      toggleView={toggleView}
       />
-    </Link>
-  ))
-
+      </Link>
+    ))
+  }
   return <main className='main-view'>{cards}</main>
 }
 
