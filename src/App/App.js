@@ -26,17 +26,16 @@ export class App extends Component {
     fetchDataGet('movies')
       .then((res) => {
         if (!res.ok) {
+          this.finishLoading()
           this.setState(
             {
               isError: true,
               errorMsg: 'Server Error, try Rotten Tomatoes instead'
-            },
-            () => {
-              throw new Error(res.status)
             }
           )
+        } else {
+          return res.json()
         }
-        return res.json()
       })
       .then((data) => {
         this.setState({
@@ -77,7 +76,7 @@ export class App extends Component {
           path='/'
           render={({ location }) => {
             return (
-              <div>
+              <div className='page-container'>
                 <Header
                   movies={this.state.movies}
                   filterMovies={this.filterMovies}
@@ -163,6 +162,7 @@ export class App extends Component {
                   finishLoading={this.finishLoading}
                   currentMovieID={match.params}
                   userData={this.state.userData}
+                  isLoggedIn={this.state.isLoggedIn}
                 />
               </div>
             )

@@ -1,6 +1,6 @@
 describe('Single Movie View tests', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/', {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
       statusCode: 201,
       body: {
         movies: [
@@ -80,11 +80,11 @@ describe('Single Movie View tests', () => {
         }
       }
     }).as('maraton')
-
-    cy.visit('http://localhost:3000/').get('img[alt="The New Mutants poster"]').click()
   })
 
   it('should display the same card from the main page', () => {
+    cy.visit('http://localhost:3000/').get('img[alt="The New Mutants poster"]').click()
+
     cy.get('img[alt="The New Mutants poster"]').should('be.visible')
 
     cy.get('.poster-title').contains('The New Mutants')

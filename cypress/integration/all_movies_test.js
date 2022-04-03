@@ -1,6 +1,6 @@
 describe('All Movies View Tests', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/', {
+    cy.intercept('https://rancid-tomatillos.herokuapp.com/api/v2/movies', {
       statusCode: 201,
       body: {
         movies: [
@@ -36,11 +36,11 @@ describe('All Movies View Tests', () => {
         ]
       }
     }).as('movies')
-
-    cy.visit('http://localhost:3000/')
   })
 
   it('Should have a header with a title, home button, search bar, and log in button', () => {
+    cy.visit('http://localhost:3000/')
+
     cy.get('header').contains('rancid tomatillos')
 
     cy.get('.home-button').contains('home')
@@ -55,7 +55,7 @@ describe('All Movies View Tests', () => {
   })
 
   it('Should render a movie title', () => {
-    cy.get('.poster-title').contains('Money Plane')
+    cy.get('.poster-title').contains('Mulan')
   })
 
   it("Should render a movie poster's rating", () => {
@@ -70,5 +70,11 @@ describe('All Movies View Tests', () => {
     cy.get('.search').type('Mulan').get('img[alt="Mulan poster"]').should('be.visible')
   })
 
-  // add test for api server not responding (test error message) (will implement after Routing) and add aliasing waits for consistent results
+  it('should render an error message if the server is not reachable', () => {
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies',
+    {statusCode: 500}
+  ).as('serverError')
+  cy.visit('http://localhost:3000/')
+  .get('.page-container').contains('Server Error, try Rotten Tomatoes instead')
+  })
 })

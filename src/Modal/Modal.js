@@ -14,9 +14,9 @@ export class Modal extends Component {
 
   render() {
     return (
-      <div className='modal-view' onClick={this.props.toggleModal}>
+      <div className='modal-view'>
         <div className='modal'>
-          <button className='close-button'>{'\u2573'}</button>
+          <button className='close-button' onClick={this.props.toggleModal}>{'\u2573'}</button>
           <h2>add your rating</h2>
           <p>out of 10</p>
           <input
