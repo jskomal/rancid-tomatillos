@@ -28,6 +28,7 @@ export class SingleView extends Component {
       .then((data) => {
         this.props.finishLoading()
         this.setState({
+          errorMsg: '',
           currentMovie: { ...data.movie }
         })
       })
@@ -87,66 +88,75 @@ export class SingleView extends Component {
       currency: 'USD'
     })
 
-    return this.state.currentMovie.title ? (
-      <section className='single-view'>
-        <h1 className='status-msg'>{this.state.errorMsg}</h1>
-        {this.state.isModalOpen && (
-          <Modal addRating={this.addRating} toggleModal={this.toggleModal} />
-        )}
-        <div>
-          <Card
-            poster_path={poster_path}
-            title={title}
-            average_rating={average_rating}
-            release_date={release_date}
-            key={id}
-          />
-          {this.props.isLoggedIn && (
-            <section className='review-view'>
-              <h3>your rating is: </h3>
-              <StarRatings
-                rating={this.state.ratingInput / 2}
-                starDimension='3vw'
-                starSpacing='0'
-                starRatedColor='goldenrod'
+    return (
+      <>
+        <p className='status-msg'>{this.state.errorMsg}</p>
+        {this.state.currentMovie.title && (
+          <section className='single-view'>
+            <h1 className='status-msg'>{this.state.errorMsg}</h1>
+            {this.state.isModalOpen && (
+              <Modal addRating={this.addRating} toggleModal={this.toggleModal} />
+            )}
+            <div>
+              <Card
+                poster_path={poster_path}
+                title={title}
+                average_rating={average_rating}
+                release_date={release_date}
+                key={id}
               />
-              <button onClick={this.toggleModal}>rate this movie</button>
-            </section>
-          )}
-        </div>
+              {this.props.isLoggedIn && (
+                <section className='review-view'>
+                  <h3>your rating is: </h3>
+                  <StarRatings
+                    rating={this.state.ratingInput / 2}
+                    starDimension='3vw'
+                    starSpacing='0'
+                    starRatedColor='goldenrod'
+                  />
+                  <button onClick={this.toggleModal}>rate this movie</button>
+                </section>
+              )}
+            </div>
 
-        <section className='single-movie-details'>
-          {backdrop_path && (
-            <img className='backdrop-img' src={backdrop_path} alt={`${title} backdrop`} />
-          )}
-          {tagline && <h3 className='movie-detail'>Tagline: {tagline}</h3>}
-          {overview && <h3 className='movie-detail'>Overview: {overview}</h3>}
-          {genres[0] && (
-            <h3 className='movie-detail'>
-              Genres: {genres.map((genre) => ` ${genre}`).toString()}
-            </h3>
-          )}
-          {budget !== 0 && (
-            <h3 className='movie-detail'>Budget: {formatter.format(budget)}</h3>
-          )}
-          {revenue !== 0 && (
-            <h3 className='movie-detail'>Revenue: {formatter.format(revenue)}</h3>
-          )}
-          {runtime !== 0 && <h3 className='movie-detail'>Runtime: {runtime} minutes</h3>}
-          {!tagline &&
-          !overview &&
-          !genres[0] &&
-          !budget !== 0 &&
-          !revenue !== 0 &&
-          !runtime !== 0 ? (
-            <h3 className='movie-detail-error'>
-              No information is available for this movie
-            </h3>
-          ) : null}
-        </section>
-      </section>
-    ) : (
-      <h1 className='status-msg'>{ this.state.errorMsg }</h1>
+            <section className='single-movie-details'>
+              {backdrop_path && (
+                <img
+                  className='backdrop-img'
+                  src={backdrop_path}
+                  alt={`${title} backdrop`}
+                />
+              )}
+              {tagline && <h3 className='movie-detail'>Tagline: {tagline}</h3>}
+              {overview && <h3 className='movie-detail'>Overview: {overview}</h3>}
+              {genres[0] && (
+                <h3 className='movie-detail'>
+                  Genres: {genres.map((genre) => ` ${genre}`).toString()}
+                </h3>
+              )}
+              {budget !== 0 && (
+                <h3 className='movie-detail'>Budget: {formatter.format(budget)}</h3>
+              )}
+              {revenue !== 0 && (
+                <h3 className='movie-detail'>Revenue: {formatter.format(revenue)}</h3>
+              )}
+              {runtime !== 0 && (
+                <h3 className='movie-detail'>Runtime: {runtime} minutes</h3>
+              )}
+              {!tagline &&
+              !overview &&
+              !genres[0] &&
+              !budget !== 0 &&
+              !revenue !== 0 &&
+              !runtime !== 0 ? (
+                <h3 className='movie-detail-error'>
+                  No information is available for this movie
+                </h3>
+              ) : null}
+            </section>
+          </section>
+        )}
+      </>
     )
   }
 }
