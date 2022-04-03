@@ -39,46 +39,12 @@ describe('Single Movie View tests', () => {
 
     cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/340102', {
       statusCode: 201,
-      body: {
-        movie: {
-          id: 340102,
-          title: 'The New Mutants',
-          poster_path:
-            'https://image.tmdb.org/t/p/original//xrI4EnZWftpo1B7tTvlMUXVOikd.jpg',
-          backdrop_path:
-            'https://image.tmdb.org/t/p/original//eCIvqa3QVCx6H09bdeOS8Al2Sqy.jpg',
-          release_date: '2020-08-26',
-          overview:
-            'Five young mutants, just discovering their abilities while held in a secret facility against their will, fight to escape their past sins and save themselves.',
-          genres: ['Action', 'Science Fiction', 'Horror', 'Adventure'],
-          budget: 67000000,
-          revenue: 3100000,
-          runtime: 94,
-          tagline: "It's time to face your demons",
-          average_rating: 4
-        }
-      }
+      fixture: 'mutants'
     }).as('mutants')
 
     cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/737173', {
       statusCode: 201,
-      body: {
-        movie: {
-          id: 737173,
-          title: 'Maratón After',
-          poster_path:
-            'https://image.tmdb.org/t/p/original//opZKcgocttEOAUzqluX3bUbbDew.jpg',
-          backdrop_path: 'https://www.esm.rochester.edu/uploads/NoPhotoAvailable.jpg',
-          release_date: '2020-09-03',
-          overview: '',
-          genres: [],
-          budget: 0,
-          revenue: 0,
-          runtime: 0,
-          tagline: '',
-          average_rating: 4.333333333333333
-        }
-      }
+      fixture: 'maraton'
     }).as('maraton')
   })
 
@@ -118,10 +84,11 @@ describe('Single Movie View tests', () => {
   })
 
   it('should render an error message if the server is not reachable', () => {
-    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/337401',
-    {statusCode: 500}
-  ).as('serverError')
-  cy.visit('http://localhost:3000/337401')
-  .get('.page-container').contains('Something went wrong, try again later')
+    cy.intercept('GET', 'https://rancid-tomatillos.herokuapp.com/api/v2/movies/337401', {
+      statusCode: 500
+    }).as('serverError')
+    cy.visit('http://localhost:3000/337401')
+      .get('.page-container')
+      .contains('Something went wrong, try again later')
   })
 })
