@@ -45,11 +45,13 @@ export class Header extends Component {
               </button>
             </Link>
           )}
-          <Link to='/login'>
-            <button className='log-button' id='logButton'>
-              log in
-            </button>
-          </Link>
+          {!this.props.isLoggedIn && (
+            <Link to='/login'>
+              <button className='log-button' id='logButton'>
+                log in
+              </button>
+            </Link>
+          )}
         </div>
       </header>
     )
