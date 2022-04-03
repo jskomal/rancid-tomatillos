@@ -33,14 +33,15 @@ export class MyProfile extends Component {
   }
 
   deleteRating = (idToDelete) => {
-    fetchDataDelete(`/users/${this.state.userData.id}/ratings/${idToDelete}`)
-    .then((res) => {
-      if (!res.ok) {
-        this.setState({ errorMsg: 'Something went wrong, try again later' })
-      } else {
-        this.createRatingCards()
+    fetchDataDelete(`/users/${this.state.userData.id}/ratings/${idToDelete}`).then(
+      (res) => {
+        if (!res.ok) {
+          this.setState({ errorMsg: 'Something went wrong, try again later' })
+        } else {
+          this.createRatingCards()
+        }
       }
-    })
+    )
   }
 
   render() {
