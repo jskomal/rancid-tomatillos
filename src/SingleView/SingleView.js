@@ -10,7 +10,6 @@ export class SingleView extends Component {
     super(props)
     this.state = {
       currentMovie: { id: props.currentMovieID.id },
-      errorMsg: 'Loading... Grab some popcorn!',
       isModalOpen: false,
       ratingInput: null
     }
@@ -21,46 +20,44 @@ export class SingleView extends Component {
       .then((res) => {
         if (!res.ok) {
           this.props.finishLoading()
-          this.setState({ errorMsg: 'Something went wrong, try again later' })
+          this.props.updateErrorMsg('Something went wrong, try again later')
         }
         return res.json()
       })
       .then((data) => {
         this.props.finishLoading()
         this.setState({
-          errorMsg: '',
           currentMovie: { ...data.movie }
         })
       })
   }
 
-  deleteRating = (currentMovieID) => {
-    fetchDataDelete(`/users/${this.props.userData.id}/ratings/${currentMovieID}`).then(
-      (res) => {
-        if (!res.ok) {
-          this.setState({ errorMsg: 'Something went wrong, try again later' })
-        }
-      }
-    )
-  }
-
   addRating = (newRating) => {
-    this.deleteRating(this.state.currentMovie.id)
+    const reviewID = this.props.userRatings.find(
+      (rating) => rating.movie_id === this.state.currentMovie.id
+    )
+    if (reviewID) {
+      this.props.deleteRating(reviewID.id)
+    }
     this.setState({ ratingInput: newRating }, () => {
       const dataToSend = {
         movie_id: parseInt(this.state.currentMovie.id),
         rating: parseInt(this.state.ratingInput)
       }
-      fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend).then((res) => {
-        if (!res.ok) {
-          this.setState({
-            errorMsg: 'Something went wrong, try again later',
-            isModalOpen: false
-          })
-        }
-        this.setState({ isModalOpen: false })
-        return res.json()
-      })
+      fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend)
+        .then((res) => {
+          if (!res.ok) {
+            this.props.updateErrorMsg('Something went wrong, try again later')
+            this.setState({
+              isModalOpen: false
+            })
+          }
+          this.setState({ isModalOpen: false })
+          return res.json()
+        })
+        .then(() => {
+          this.props.fetchRatings()
+        })
     })
   }
 
@@ -83,17 +80,27 @@ export class SingleView extends Component {
       runtime,
       tagline
     } = this.state.currentMovie
+
     const formatter = new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD'
     })
 
+    let currentMovieRating
+    if (this.props.userRatings) {
+      currentMovieRating = this.props.userRatings.find((rating) => {
+        return parseInt(id) === parseInt(rating.movie_id)
+      })
+    }
+
     return (
       <>
-        <p className='status-msg'>{this.state.errorMsg}</p>
+        {this.props.isLoading && (
+          <p className='status-msg'>Loading... Grab some popcorn!</p>
+        )}
         {this.state.currentMovie.title && (
           <section className='single-view'>
-            <h1 className='status-msg'>{this.state.errorMsg}</h1>
+            <h1 className='status-msg'>{this.props.errorMsg}</h1>
             {this.state.isModalOpen && (
               <Modal addRating={this.addRating} toggleModal={this.toggleModal} />
             )}
@@ -109,7 +116,7 @@ export class SingleView extends Component {
                 <section className='review-view'>
                   <h3>your rating is: </h3>
                   <StarRatings
-                    rating={this.state.ratingInput / 2}
+                    rating={currentMovieRating ? currentMovieRating.rating / 2 : 0}
                     starDimension='3vw'
                     starSpacing='0'
                     starRatedColor='goldenrod'
