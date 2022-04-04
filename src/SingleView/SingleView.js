@@ -107,9 +107,9 @@ export class SingleView extends Component {
         {this.props.isLoading && (
           <p className='status-msg'>Loading... Grab some popcorn!</p>
         )}
+        <h1 className='status-msg'>{this.props.errorMsg}</h1>
         {this.state.currentMovie.title && (
           <section className='single-view'>
-            <h1 className='status-msg'>{this.props.errorMsg}</h1>
             {this.state.isModalOpen && (
               <Modal
                 addRating={this.addRating}
