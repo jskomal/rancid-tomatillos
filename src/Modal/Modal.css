@@ -1,8 +1,9 @@
 .modal-view {
   position: fixed;
   z-index: 10;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
   background-color: #333333b6;
   display: flex;
   justify-content: center;
@@ -33,4 +34,16 @@
   font-size: 1vw;
   width: 2vw;
   height: 2vw;
+}
+
+.modal-input {
+  color: #fff;
+  width: 30vw;
+  border: none;
+  background-color: var(--stack-grey);
+  border: 1px solid var(--stack-grey);
+  border-radius: 0.3rem;
+  margin: 2vh 0;
+  text-align: center;
+  max-width: 100px;
 }
