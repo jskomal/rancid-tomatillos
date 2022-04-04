@@ -40,12 +40,18 @@ export class Header extends Component {
         <div className='logo-pair'>
           {this.props.isLoggedIn && (
             <Link to='profile'>
-              <button className='log-button'>my profile</button>
+              <button className='log-button' id='profileButton'>
+                my profile
+              </button>
             </Link>
           )}
-          <Link to='/login'>
-            <button className='log-button'>log in</button>
-          </Link>
+          {!this.props.isLoggedIn && this.props.location !== '/login' && (
+            <Link to='/login'>
+              <button className='log-button' id='logButton'>
+                log in
+              </button>
+            </Link>
+          )}
         </div>
       </header>
     )

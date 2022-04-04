@@ -5,7 +5,7 @@ import './Modal.css'
 export class Modal extends Component {
   constructor() {
     super()
-    this.state = { ratingValue: '5' }
+    this.state = { ratingValue: '' }
   }
 
   handleInput = (e) => {
@@ -16,16 +16,19 @@ export class Modal extends Component {
     return (
       <div className='modal-view'>
         <div className='modal'>
-          <button className='close-button' onClick={this.props.toggleModal}>{'\u2573'}</button>
+          <button className='close-button' onClick={this.props.toggleModal}>
+            {'\u2573'}
+          </button>
           <h2>add your rating</h2>
           <p>out of 10</p>
           <input
             type='number'
-            className='login-input'
+            className='modal-input'
             name='ratingValue'
             min='1'
             max='10'
             step='1'
+            placeholder='5'
             value={this.state.ratingValue}
             onChange={this.handleInput}
           />
@@ -37,9 +40,10 @@ export class Modal extends Component {
               starRatedColor='goldenrod'
             />
           </div>
-          <button onClick={(e) => this.props.addRating(this.state.ratingValue)}>
+          <button id='submitRatingButton' onClick={(e) => this.props.addRating(this.state.ratingValue)}>
             submit rating
           </button>
+          <p style={{color: 'red'}} className='status-msg'>{this.props.modalErrMsg}</p>
         </div>
       </div>
     )

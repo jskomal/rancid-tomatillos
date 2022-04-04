@@ -19,7 +19,11 @@ const RatingCard = ({ id, movie_id, rating, dateUpdated, movies, deleteRating })
         />
       </div>
       <p>Rating last Updated: {dayjs(dateUpdated).format('MMMM D, YYYY')}</p>
-      <button className='ratings-button' onClick={(e) => deleteRating(id)}>
+      <button
+        id={`${movie_id}Button`}
+        className='ratings-button'
+        onClick={(e) => deleteRating(id)}
+      >
         delete rating
       </button>
     </section>

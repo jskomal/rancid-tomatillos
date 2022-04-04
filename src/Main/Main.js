@@ -8,15 +8,15 @@ const Main = ({ movies, toggleView }) => {
   if (movies) {
     cards = movies.map((movie) => (
       <Link className='card-link' to={`/${movie.id}`} key={movie.id}>
-      <Card
-      id={movie.id}
-      poster_path={movie.poster_path}
-      title={movie.title}
-      average_rating={movie.average_rating}
-      release_date={movie.release_date}
-      key={movie.id}
-      toggleView={toggleView}
-      />
+        <Card
+          id={movie.id}
+          poster_path={movie.poster_path}
+          title={movie.title}
+          average_rating={movie.average_rating}
+          release_date={movie.release_date}
+          key={movie.id}
+          toggleView={toggleView}
+        />
       </Link>
     ))
   }

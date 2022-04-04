@@ -12,7 +12,7 @@ const Card = ({ poster_path, title, average_rating, release_date, toggleView, id
       <section id={id} className='poster-footer'>
         <div id={id} className='detail-pair'>
           <h3 id={id} className='footer-item-l label'>
-            rating:
+            average rating:
           </h3>
           <div className='stars'>
             <StarRatings

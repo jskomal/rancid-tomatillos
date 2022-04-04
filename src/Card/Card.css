@@ -55,7 +55,3 @@
   display: flex;
   flex-direction: column;
 }
-
-.stars {
-  transform: translate(-0.3vw, 0);
-}

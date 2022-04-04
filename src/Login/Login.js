@@ -63,6 +63,9 @@ export class Login extends Component {
             statusMsg: 'Success, Routing you to the home page!'
           })
         })
+        .then(() => {
+          this.props.fetchRatings()
+        })
         .then(() =>
           setTimeout(() => {
             this.setState({ isLoggedIn: true })
@@ -96,7 +99,16 @@ export class Login extends Component {
         <button className='login-button' onClick={this.submitLogIn}>
           log in
         </button>
-        <p className='status-msg' style={{ color: this.state.hasError ? 'red' : '#fff' }}>
+        <p
+          className='status-msg'
+          style={{
+            color:
+              this.state.hasError ||
+              this.state.statusMsg === 'You must provide an email and password to submit'
+                ? 'red'
+                : '#fff'
+          }}
+        >
           {this.state.statusMsg}
         </p>
         {this.state.isLoggedIn && <Redirect to='/' />}
