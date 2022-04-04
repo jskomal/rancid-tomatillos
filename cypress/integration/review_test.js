@@ -37,4 +37,13 @@ describe('Review/Ratings Tests', () => {
     .get('.review-view')
     .contains('your rating is:')
   })
+
+  it('should be able to successfully add a review/rating', () => {
+    cy.get('#modalButton').click()
+    .get('input[name="ratingValue"]')
+    .type('10')
+    .get('#submitRatingButton').click()
+    .get('.review-view')
+    .contains('your rating is:')
+  })
 })
