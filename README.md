@@ -24,32 +24,41 @@ Do you struggle to find the right movie to watch while sifting through your stre
 - [x] Create a multi-page UX using Router
 
 ## Project Overview
-Main View -
+- Main View
+
 ![rancid-tomatillos-main](https://user-images.githubusercontent.com/90876852/161633725-b361cad7-94b3-4342-85e8-63fbd9318964.gif)
 
-Searching - 
+- Search Bar Functionality
+
 ![rancid-tomatillos-search](https://user-images.githubusercontent.com/90876852/161633461-20969108-5df9-43c9-9f8e-846f5dc1a74a.gif)
 
-Login / Profile -
+- Login / Profile View
+
 ![rancid-tomatillos-login](https://user-images.githubusercontent.com/90876852/161634018-a9473b2a-3e88-4cce-a77c-dd9fe68d90a9.gif)
 
-Leave a Rating -
+- Leave a Rating
+
 ![rancid-tomatillos-rating](https://user-images.githubusercontent.com/90876852/161634163-81426265-aece-4a00-94f9-ffa12bd59373.gif)
 
 
 ## Technologies Used
-
-
-
-## Systems/Practices
-
-
+- React
+    - Created with create-react-app
+- Javascript
+- CSS
+- HTML
+- Cypress
+- NPM Packages
 
 ## Setup
-
-
+```js
+git clone git@github.com:jskomal/rancid-tomatillos.git
+cd rancid-tomatillos
+npm i
+npm start
+```
 
 ## Contributors
+> Jordan Skomal - GitHub: https://github.com/jskomal
 
-- Jordan Skomal - GitHub: https://github.com/jskomal
-- Daniel Solomon - GitHub: https://github.com/danielsolomon332
+> Daniel Solomon - GitHub: https://github.com/danielsolomon332
