@@ -11,7 +11,8 @@ export class SingleView extends Component {
     this.state = {
       currentMovie: { id: props.currentMovieID.id },
       isModalOpen: false,
-      ratingInput: null
+      ratingInput: null,
+      modalErrMsg: ''
     }
   }
 
@@ -32,6 +33,10 @@ export class SingleView extends Component {
       })
   }
 
+  validateRating = () => {
+    return this.state.ratingInput >= 1 && this.state.ratingInput <= 10 ? true : false
+  }
+
   addRating = (newRating) => {
     const reviewID = this.props.userRatings.find(
       (rating) => rating.movie_id === this.state.currentMovie.id
@@ -40,24 +45,28 @@ export class SingleView extends Component {
       this.props.deleteRating(reviewID.id)
     }
     this.setState({ ratingInput: newRating }, () => {
-      const dataToSend = {
-        movie_id: parseInt(this.state.currentMovie.id),
-        rating: parseInt(this.state.ratingInput)
+      if (this.validateRating()) {
+        const dataToSend = {
+          movie_id: parseInt(this.state.currentMovie.id),
+          rating: parseInt(this.state.ratingInput)
+        }
+        fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend)
+          .then((res) => {
+            if (!res.ok) {
+              this.props.updateErrorMsg('Something went wrong, try again later')
+              this.setState({
+                isModalOpen: false
+              })
+            }
+            this.setState({ isModalOpen: false })
+            return res.json()
+          })
+          .then(() => {
+            this.props.fetchRatings()
+          })
+      } else {
+        this.setState({ modalErrMsg: 'Please choose a whole number betweeen 1 and 10' })
       }
-      fetchDataPost(`users/${this.props.userData.id}/ratings`, dataToSend)
-        .then((res) => {
-          if (!res.ok) {
-            this.props.updateErrorMsg('Something went wrong, try again later')
-            this.setState({
-              isModalOpen: false
-            })
-          }
-          this.setState({ isModalOpen: false })
-          return res.json()
-        })
-        .then(() => {
-          this.props.fetchRatings()
-        })
     })
   }
 
@@ -102,9 +111,13 @@ export class SingleView extends Component {
           <section className='single-view'>
             <h1 className='status-msg'>{this.props.errorMsg}</h1>
             {this.state.isModalOpen && (
-              <Modal addRating={this.addRating} toggleModal={this.toggleModal} />
+              <Modal
+                addRating={this.addRating}
+                toggleModal={this.toggleModal}
+                modalErrMsg={this.state.modalErrMsg}
+              />
             )}
-            <div>
+            <div className='single-view-left'>
               <Card
                 poster_path={poster_path}
                 title={title}
