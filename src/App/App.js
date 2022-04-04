@@ -85,14 +85,17 @@ export class App extends Component {
     if (this.state.userRatings) {
       const ratedMovieRatingIDs = this.state.userRatings.map((rating) => rating.id)
       if (ratedMovieRatingIDs.includes(idToDelete)) {
-        fetchDataDelete(`users/${this.state.userData.id}/ratings/${idToDelete}`)
+        return fetchDataDelete(`users/${this.state.userData.id}/ratings/${idToDelete}`)
           .then((res) => {
             if (!res.ok) {
               this.updateErrorMsg('Something went wrong, try again later')
+            } else {
+              return res
             }
           })
-          .then(() => {
+          .then((res) => {
             this.fetchRatings()
+            return res
           })
       }
     }

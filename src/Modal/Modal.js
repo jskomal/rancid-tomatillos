@@ -40,10 +40,15 @@ export class Modal extends Component {
               starRatedColor='goldenrod'
             />
           </div>
-          <button id='submitRatingButton' onClick={(e) => this.props.addRating(this.state.ratingValue)}>
+          <button
+            id='submitRatingButton'
+            onClick={(e) => this.props.handleSubmitRating(this.state.ratingValue)}
+          >
             submit rating
           </button>
-          <p style={{color: 'red'}} className='status-msg'>{this.props.modalErrMsg}</p>
+          <p style={{ color: 'red' }} className='status-msg'>
+            {this.props.modalErrMsg}
+          </p>
         </div>
       </div>
     )
