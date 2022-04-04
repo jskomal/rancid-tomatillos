@@ -5,6 +5,7 @@ import SingleView from '../SingleView/SingleView'
 import Login from '../Login/Login'
 import MyProfile from '../MyProfile/MyProfile'
 import './App.css'
+import './MediaQueries.css'
 import { Route, Switch } from 'react-router-dom'
 import { fetchDataGet, fetchDataDelete } from '../APICalls'
 
