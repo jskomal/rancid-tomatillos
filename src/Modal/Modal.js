@@ -16,12 +16,14 @@ export class Modal extends Component {
     return (
       <div className='modal-view'>
         <div className='modal'>
-          <button className='close-button' onClick={this.props.toggleModal}>{'\u2573'}</button>
+          <button className='close-button' onClick={this.props.toggleModal}>
+            {'\u2573'}
+          </button>
           <h2>add your rating</h2>
           <p>out of 10</p>
           <input
             type='number'
-            className='login-input'
+            className='modal-input'
             name='ratingValue'
             min='1'
             max='10'
@@ -40,6 +42,7 @@ export class Modal extends Component {
           <button onClick={(e) => this.props.addRating(this.state.ratingValue)}>
             submit rating
           </button>
+          <p className='status-msg'>{this.props.modalErrMsg}</p>
         </div>
       </div>
     )
