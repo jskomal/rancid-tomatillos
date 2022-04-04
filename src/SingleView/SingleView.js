@@ -134,7 +134,7 @@ export class SingleView extends Component {
                     starSpacing='0'
                     starRatedColor='goldenrod'
                   />
-                  <button onClick={this.toggleModal}>rate this movie</button>
+                  <button id='modalButton' onClick={this.toggleModal}>rate this movie</button>
                 </section>
               )}
             </div>
