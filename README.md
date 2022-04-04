@@ -24,7 +24,17 @@ Do you struggle to find the right movie to watch while sifting through your stre
 - [x] Create a multi-page UX using Router
 
 ## Project Overview
+Main View -
+![rancid-tomatillos-main](https://user-images.githubusercontent.com/90876852/161633725-b361cad7-94b3-4342-85e8-63fbd9318964.gif)
 
+Searching - 
+![rancid-tomatillos-search](https://user-images.githubusercontent.com/90876852/161633461-20969108-5df9-43c9-9f8e-846f5dc1a74a.gif)
+
+Login / Profile -
+![rancid-tomatillos-login](https://user-images.githubusercontent.com/90876852/161634018-a9473b2a-3e88-4cce-a77c-dd9fe68d90a9.gif)
+
+Leave a Rating -
+![rancid-tomatillos-rating](https://user-images.githubusercontent.com/90876852/161634163-81426265-aece-4a00-94f9-ffa12bd59373.gif)
 
 
 ## Technologies Used
