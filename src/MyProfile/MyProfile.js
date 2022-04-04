@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './MyProfile.css'
 import RatingCard from '../RatingCard/RatingCard'
 import ToRate from '../ToRate/ToRate'
