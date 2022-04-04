@@ -45,7 +45,7 @@ export class Header extends Component {
               </button>
             </Link>
           )}
-          {!this.props.isLoggedIn && (
+          {!this.props.isLoggedIn && this.props.location !== '/login' && (
             <Link to='/login'>
               <button className='log-button' id='logButton'>
                 log in
