@@ -46,4 +46,13 @@ describe('Review/Ratings Tests', () => {
     .get('.review-view')
     .contains('your rating is:')
   })
+
+  it('should not be able to submit an invalid rating', () => {
+    cy.get('#modalButton').click()
+    .get('input[name="ratingValue"]')
+    .type('69')
+    .get('#submitRatingButton').click()
+    .get('.status-msg')
+    .contains('Please choose a whole number betweeen 1 and 10')
+  })
 })
