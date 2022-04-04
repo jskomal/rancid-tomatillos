@@ -38,12 +38,6 @@ export class SingleView extends Component {
   }
 
   addRating = (newRating) => {
-    const reviewID = this.props.userRatings.find(
-      (rating) => rating.movie_id === this.state.currentMovie.id
-    )
-    if (reviewID) {
-      this.props.deleteRating(reviewID.id)
-    }
     this.setState({ ratingInput: newRating }, () => {
       if (this.validateRating()) {
         const dataToSend = {
@@ -65,9 +59,24 @@ export class SingleView extends Component {
             this.props.fetchRatings()
           })
       } else {
-        this.setState({ modalErrMsg: 'Please choose a whole number betweeen 1 and 10' })
+        this.setState({
+          modalErrMsg: 'Please choose a whole number betweeen 1 and 10'
+        })
       }
     })
+  }
+
+  handleSubmitRating = (newRating) => {
+    const reviewID = this.props.userRatings.find(
+      (rating) => rating.movie_id === this.state.currentMovie.id
+    )
+    if (reviewID) {
+      this.props.deleteRating(reviewID.id).then(() => {
+        this.addRating(newRating)
+      })
+    } else {
+      this.addRating(newRating)
+    }
   }
 
   toggleModal = () => {
@@ -112,7 +121,7 @@ export class SingleView extends Component {
           <section className='single-view'>
             {this.state.isModalOpen && (
               <Modal
-                addRating={this.addRating}
+                handleSubmitRating={this.handleSubmitRating}
                 toggleModal={this.toggleModal}
                 modalErrMsg={this.state.modalErrMsg}
               />
@@ -134,7 +143,9 @@ export class SingleView extends Component {
                     starSpacing='0'
                     starRatedColor='goldenrod'
                   />
-                  <button id='modalButton' onClick={this.toggleModal}>rate this movie</button>
+                  <button id='modalButton' onClick={this.toggleModal}>
+                    rate this movie
+                  </button>
                 </section>
               )}
             </div>
