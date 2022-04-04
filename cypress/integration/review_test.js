@@ -29,5 +29,12 @@ describe('Review/Ratings Tests', () => {
     .contains('your rating is:')
   })
 
-
+  it('should be able to open and close the modal', () => {
+    cy.get('#modalButton').click()
+    .get('.modal-view')
+    .contains('add your rating')
+    .get('.close-button').click()
+    .get('.review-view')
+    .contains('your rating is:')
+  })
 })
