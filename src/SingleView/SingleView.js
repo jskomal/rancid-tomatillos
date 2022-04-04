@@ -3,7 +3,7 @@ import Card from '../Card/Card'
 import Modal from '../Modal/Modal'
 import StarRatings from 'react-star-ratings/build/star-ratings'
 import './SingleView.css'
-import { fetchDataGet, fetchDataPost, fetchDataDelete } from '../APICalls'
+import { fetchDataGet, fetchDataPost } from '../APICalls'
 
 export class SingleView extends Component {
   constructor(props) {
