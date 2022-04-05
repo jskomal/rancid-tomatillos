@@ -5,6 +5,9 @@ Do you struggle to find the right movie to watch while sifting through your stre
 
 [View our project here](https://jskomal-rancid-tomatillos.herokuapp.com/)
 
+
+> note: sign in with the credentials **email: charlie@turing.io** and **password: qwerty** to view the my profile page / add and delete ratings!
+
 ## Wins
 - Achieved an accessibility score of 100 with Lighthouse.
 - Effective use of GitHub projects, project boards, and issues to keep track and develop project.
